@@ -10,6 +10,8 @@ const PORT = 3333;
 const UsuariosRouter = require('../src/routes/UsuariosRouter');
 const MedicamentosRouter = require('../src/routes/MedicamentosRouter');
 const EnderecosRouter = require('../src/routes/EnderecosRouter');
+const DiaMedRouter = require('../src/routes/DiaMedRouter');
+const HoraMedRouter = require('../src/routes/HoraMedRouter');
 
 //MIDDLEWARES DE CORPO DE REQUISIÇÃO
 app.use(express.json());
@@ -20,7 +22,9 @@ app.use(cors());
 app.use('/', UsuariosRouter); 
 app.use('/', MedicamentosRouter);
 app.use('/', EnderecosRouter);
+app.use('/', DiaMedRouter);
+app.use('/', HoraMedRouter);
 
-app.listen(PORT, ()=> console.log('SERVIDOR RODANDO EM http://localhost:3333'));
+app.listen(()=> console.log(`SERVIDOR RODANDO EM http://localhost:${PORT}`));
 
 

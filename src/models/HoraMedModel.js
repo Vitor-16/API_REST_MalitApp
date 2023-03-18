@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 //CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const HoraMedModel = connection.define('tbl_HoraMed',
+const HoraMedModel = connection.define('tbl_Horarios',
 {
     id_HoraMed:{
         type: DataTypes.INTEGER,
@@ -12,7 +12,7 @@ const HoraMedModel = connection.define('tbl_HoraMed',
         autoIncrement: true
     },
     hora_HoraMed:{
-        type: DataTypes.TIMESTAMP,
+        type: DataTypes.TIME,
         allowNull: false
     }
 });
