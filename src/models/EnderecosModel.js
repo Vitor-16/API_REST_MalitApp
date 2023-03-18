@@ -14,6 +14,14 @@ const EnderecosModel = connection.define ('tbl_Enderecos',
     cep_Enderecos: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            isCepValidate(cep_Enderecos) {
+                const cepRegex = /^\d{5}-\d{3}$/;
+                if (!cepRegex.test(cep_Enderecos)) {
+                  throw new Error('CEP INSERIDO INVÁLIDO');
+                }
+            }
+        }
     },
     estado_Enderecos: {
         type: DataTypes.STRING,

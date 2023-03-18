@@ -1,5 +1,5 @@
 //IMPORTS
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');   
 
 //CONEXÃO COM BD
@@ -21,10 +21,10 @@ const UsuariosModel = connection.define('tbl_usuarios',
         allowNull: false,
         unique: true,
         validate:{
-            isCPF(value) {
+            isCPF(cpf_Usuarios) {
                 const cpfPattern = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-                if (!cpfPattern.test(value)) {
-                  throw new Error('O CPF informado é inválido');
+                if (!cpfPattern.test(cpf_Usuarios)) {
+                  throw new Error('CPF INSERIDO INVÁLIDO');
                 } 
             }  
         }
@@ -47,10 +47,13 @@ const UsuariosModel = connection.define('tbl_usuarios',
     senha_Usuarios:{
         type: DataTypes.STRING,
         allowNull: false,
+        validate:{
+        len: [8, 20]
+        }
     }
-});
+}, {Sequelize});
 
-UsuariosModel.beforeSave(async (tbl_usuarios, options) => {
+UsuariosModel.beforeSave(async (tbl_usuarios) => {
     if (tbl_usuarios.changed('senha_Usuarios')) {
       const salt = await bcrypt.genSalt(10);
       tbl_usuarios.senha_Usuarios = await bcrypt.hash(tbl_usuarios.senha_Usuarios, salt);
