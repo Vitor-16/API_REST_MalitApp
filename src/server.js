@@ -29,6 +29,6 @@ app.use('/', HoraMedRouter);
 app.use('/', PedidosVendasRouter);
 app.use('/', MaletasProdRouter);
 
-app.listen(()=>console.log(`SERVIDOR RODANDO EM http://localhost:${PORT}`));
+app.listen(PORT, ()=>console.log(`SERVIDOR RODANDO EM http://localhost:${PORT}`));
 
 

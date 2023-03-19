@@ -3,7 +3,7 @@ const MedicamentosModel = require('../models/MedicamentosModel');
 const MedicamentosController = {
     createMed: (req, res)=>{
         let{nome_Medicamentos, descricao_Medicamentos, 
-            quantidade_Medicamentos, validade_Medicamentos} = req.body
+        quantidade_Medicamentos, validade_Medicamentos} = req.body
         MedicamentosModel.create({nome_Medicamentos, descricao_Medicamentos, 
         quantidade_Medicamentos, validade_Medicamentos}
         )
