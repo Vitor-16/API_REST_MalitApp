@@ -4,23 +4,23 @@ const { DataTypes } = require('sequelize');
 //CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const   PedidosVendasModel = connection.define('tbl_PedidosVendas',
+const PedidosVendasModel = connection.define('tbl_PedidosVendas',
 {
-    id_PedidosVendas:{
+    id_Pedidos:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    data_PedidosVendas:{
-        type: DataTypes.DATE,
+    status_Pedidos:{
+        type: DataTypes.STRING,
         allowNull: false
     },
-    hora_PedidosVendas:{
-        type: DataTypes.DATEONLY,
-        allowNull: false
-    },
-    valor_PedidosVendas:{
+    valor_Pedidos:{
         type: DataTypes.DECIMAL(10,2),
+        allowNull: false
+    },
+    formaPagamento_Pedidos:{
+        type: DataTypes.STRING,
         allowNull: false
     }
 });
