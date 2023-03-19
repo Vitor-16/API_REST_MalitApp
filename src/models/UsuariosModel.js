@@ -36,6 +36,13 @@ const UsuariosModel = connection.define('tbl_usuarios',
             isDate: true
         }
     },
+    telefone_Usuarios:{
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        validate:{
+            is: /^\(\d{2}\)\s\d{5}\-\d{4}$/
+        }
+    },
     email_Usuarios:{
         type: DataTypes.STRING,
         allowNull: false,
@@ -60,5 +67,5 @@ UsuariosModel.beforeSave(async (tbl_usuarios) => {
     }
 });
   
-//UsuariosModel.sync({force: true});
+UsuariosModel.sync({force: true});
 module.exports = UsuariosModel;

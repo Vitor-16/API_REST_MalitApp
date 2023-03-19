@@ -2,9 +2,9 @@ const UsuariosModel = require('../models/UsuariosModel');
 
 const UsuariosController = {
     createUser: (req, res)=>{
-        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, email_Usuarios, senha_Usuarios} = req.body
+        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios} = req.body
         UsuariosModel.create(
-        {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, email_Usuarios, senha_Usuarios}
+        {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios}
         )
         .then(
             ()=>{
@@ -46,10 +46,10 @@ const UsuariosController = {
         )
     },
     putUser:(req, res)=>{
-        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, email_Usuarios, senha_Usuarios} = req.body;
+        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios} = req.body;
         const{id_Usuarios} = req.params;
         UsuariosModel.update(
-            {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, email_Usuarios, senha_Usuarios},
+            {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios},
             {where:{id_Usuarios}}
         )
         .then(

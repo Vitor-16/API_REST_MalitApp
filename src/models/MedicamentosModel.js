@@ -17,7 +17,7 @@ const MedicamentosModel = connection.define('tbl_Medicamentos',
     },
     descricao_Medicamentos: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     quantidade_Medicamentos: {
         type: DataTypes.FLOAT,
@@ -25,7 +25,7 @@ const MedicamentosModel = connection.define('tbl_Medicamentos',
     },
     validade_Medicamentos: {
         type: DataTypes.DATEONLY,
-        allowNull: false
+        allowNull: true
     }
 });
 
