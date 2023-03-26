@@ -7,6 +7,7 @@
 - Node JS
 - NPM
 - Express
+- Bcrypt
 - Cors
 - ESLint
 - Sequelize
