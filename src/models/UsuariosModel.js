@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');
+const EnderecosModel = require('./EnderecosModel');
 
 const UsuariosModel = connection.define('tbl_usuarios', 
 {
@@ -65,6 +66,11 @@ UsuariosModel.beforeSave(async (tbl_usuarios) => {
       const salt = await bcrypt.genSalt(10);
       tbl_usuarios.senha_Usuarios = await bcrypt.hash(tbl_usuarios.senha_Usuarios, salt);
     }
+});
+
+UsuariosModel.belongsTo(EnderecosModel, {
+    constraint: true,
+    foreignkey: 'id_Endereço'
 });
   
 module.exports = UsuariosModel;
