@@ -58,10 +58,6 @@ const UsuariosModel = connection.define('tbl_usuarios',
         len: [8, 20]
         }
     },
-    fk_Enderecos: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    }
 }, {Sequelize});
 
 UsuariosModel.beforeSave(async (tbl_usuarios) => {
@@ -70,13 +66,6 @@ UsuariosModel.beforeSave(async (tbl_usuarios) => {
       tbl_usuarios.senha_Usuarios = await bcrypt.hash(tbl_usuarios.senha_Usuarios, salt);
     }
 });
-
-UsuariosModel.associate = function(models) {
-    UsuariosModel.belongsTo(models.EnderecosModel, {
-      foreignKey: 'fk_Enderecos',
-      as: 'endereco'
-    });
-};
   
 //UsuariosModel.sync({force: true});
 module.exports = UsuariosModel;

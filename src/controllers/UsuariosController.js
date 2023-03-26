@@ -4,10 +4,10 @@ const UsuariosModel = require('../models/UsuariosModel');
 const UsuariosController = {
     createUser: (req, res)=>{
         let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios,
-        email_Usuarios, senha_Usuarios, fk_Enderecos} = req.body
+        email_Usuarios, senha_Usuarios} = req.body
         UsuariosModel.create(
         {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios,
-        email_Usuarios, senha_Usuarios, fk_Enderecos}
+        email_Usuarios, senha_Usuarios}
         )
         .then(
             ()=>{
@@ -48,11 +48,55 @@ const UsuariosController = {
             }
         )
     },
+    getUserEmail:(req, res)=>{
+        let{email_Usuarios} = req.params;
+        UsuariosModel.findOne({attributes:['email_Usuarios', 'senha_Usuarios'], where:{email_Usuarios}})
+        .then(
+            (response)=>{
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:"USÚARIO LISTADO POR EMAIL.",
+                    data:response
+                });
+            }
+        )
+        .catch(
+            (error)=>{
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO LISTAR USÚARIO POR EMAIL.",
+                    errorObject:error
+                });
+            }
+        )
+    },
+    getUserCPF:(req, res)=>{
+        let{cpf_Usuarios} = req.params;
+        UsuariosModel.findOne({attributes:['cpf_Usuarios', 'senha_Usuarios'], where:{cpf_Usuarios}})
+        .then(
+            (response)=>{
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:"USÚARIO LISTADO POR CPF.",
+                    data:response
+                });
+            }
+        )
+        .catch(
+            (error)=>{
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO LISTAR USÚARIO POR CPF.",
+                    errorObject:error
+                });
+            }
+        )
+    },
     putUser:(req, res)=>{
-        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios, fk_Enderecos} = req.body;
+        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios} = req.body;
         const{id_Usuarios} = req.params;
         UsuariosModel.update(
-            {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios, fk_Enderecos},
+            {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios},
             {where:{id_Usuarios}}
         )
         .then(

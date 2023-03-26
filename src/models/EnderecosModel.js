@@ -45,12 +45,5 @@ const EnderecosModel = connection.define ('tbl_Enderecos',
     }
 });
 
-EnderecosModel.associate = function(models) {
-    EnderecosModel.hasOne(models.UsuariosModel, {
-      foreignKey: 'fk_Enderecos',
-      as: 'usuario'
-    });
-};
-
 //EnderecosModel.sync({force: true});
 module.exports = EnderecosModel;
