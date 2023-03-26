@@ -7,6 +7,8 @@
 - Node JS
 - NPM
 - Express
+- Cors
+- ESLint
 - Sequelize
 - MySql
 - Insomnia
