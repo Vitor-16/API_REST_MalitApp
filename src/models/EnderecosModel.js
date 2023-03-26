@@ -1,5 +1,5 @@
 //IMPORTS
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');
@@ -45,5 +45,4 @@ const EnderecosModel = connection.define ('tbl_Enderecos',
     }
 });
 
-//EnderecosModel.sync({force: true});
 module.exports = EnderecosModel;

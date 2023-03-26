@@ -67,5 +67,4 @@ UsuariosModel.beforeSave(async (tbl_usuarios) => {
     }
 });
   
-//UsuariosModel.sync({force: true});
 module.exports = UsuariosModel;

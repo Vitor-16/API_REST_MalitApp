@@ -1,5 +1,5 @@
 //IMPORTS
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');
@@ -17,5 +17,4 @@ const DiaMedModel = connection.define('tbl_Data',
     }
 });
 
-//DiaMedModel.sync({force: true});
 module.exports = DiaMedModel;

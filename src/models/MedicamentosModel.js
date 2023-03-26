@@ -1,5 +1,5 @@
 //IMPORTS
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');
@@ -29,5 +29,4 @@ const MedicamentosModel = connection.define('tbl_Medicamentos',
     }
 });
 
-//MedicamentosModel.sync({force: true});
 module.exports = MedicamentosModel;

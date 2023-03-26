@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const connection = require('./config/connection');
+//connection.sync({force: true});
 
 //DEFINIÇÃO DA PORTA LOCAL PARA RODAR O SERVIDOR
 const PORT = 3333;
