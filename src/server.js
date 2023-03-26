@@ -9,13 +9,13 @@ const connection = require('./config/connection');
 const PORT = 3333;
 
 //REQUISIÇÃO DAS ROTAS
-const UsuariosRouter = require('../src/routes/UsuariosRouter');
-const MedicamentosRouter = require('../src/routes/MedicamentosRouter');
-const EnderecosRouter = require('../src/routes/EnderecosRouter');
-const DiaMedRouter = require('../src/routes/DiaMedRouter');
-const HoraMedRouter = require('../src/routes/HoraMedRouter');
-const PedidosVendasRouter = require('../src/routes/PedidosVendasRouter');
-const MaletasProdRouter = require('../src/routes/MaletasProdRouter');
+const UsuariosRouter = require('./routes/UsuariosRouter');
+const MedicamentosRouter = require('./routes/MedicamentosRouter');
+const EnderecosRouter = require('./routes/EnderecosRouter');
+const DiaMedRouter = require('./routes/DiaMedRouter');
+const HoraMedRouter = require('./routes/HoraMedRouter');
+const PedidosVendasRouter = require('./routes/PedidosVendasRouter');
+const MaletasProdRouter = require('./routes/MaletasProdRouter');
 
 //MIDDLEWARES DE CORPO DE REQUISIÇÃO
 app.use(express.json());
