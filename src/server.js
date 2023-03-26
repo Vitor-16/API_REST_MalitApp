@@ -1,4 +1,4 @@
-//ARQUIVO ENDRY POINT DO PROJETO, FAZENDO USO DO EXPRESS 
+//ARQUIVO ENDRY POINT DO PROJETO, FAZENDO USO DO EXPRESS, REQUISIÇÕES A SEREM UTILIZADAS 
 const express = require('express');
 const app = express();
 const cors = require('cors');
