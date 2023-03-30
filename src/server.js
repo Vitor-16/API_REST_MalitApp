@@ -16,6 +16,7 @@ const DiaMedRouter = require('./routes/DiaMedRouter');
 const HoraMedRouter = require('./routes/HoraMedRouter');
 const PedidosVendasRouter = require('./routes/PedidosVendasRouter');
 const MaletasProdRouter = require('./routes/MaletasProdRouter');
+const UsuariosMedRouter = require('./routes/UsuariosMedRouter');
 
 //MIDDLEWARES DE CORPO DE REQUISIÇÃO
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use('/', DiaMedRouter);
 app.use('/', HoraMedRouter);
 app.use('/', PedidosVendasRouter);
 app.use('/', MaletasProdRouter);
+app.use('/', UsuariosMedRouter);
 
 app.listen(PORT, ()=>console.log(`SERVIDOR RODANDO EM http://localhost:${PORT}`));
 
