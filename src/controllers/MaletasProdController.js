@@ -95,7 +95,7 @@ const MaletasProdController = {
         MaletasProdModel.findByPk(id_MaletasProd)
         .then((tbl_MaletasProd)=>{
             if (tbl_MaletasProd){
-                ProdutosVendasModel.destroy({where:{id_MaletasProd}})
+                MaletasProdModel.destroy({where:{id_MaletasProd}})
                 .then(()=>{
                     return res.status(200).json({
                         erroStatus:false,

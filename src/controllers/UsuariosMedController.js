@@ -4,9 +4,9 @@ const UsuariosMedModel = require('../models/UsuariosMedModel');
 
 const UsuariosMedController = {
     createUserMed: (req, res)=>{
-        let{} = req.body
+        let{id_UsuariosMed} = req.body
         UsuariosMedModel.create(
-        {}
+        {id_UsuariosMed}
         )
         .then(
             ()=>{
