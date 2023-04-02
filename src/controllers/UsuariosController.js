@@ -1,5 +1,5 @@
-const EnderecosModel = require('../models/EnderecosModel');
 const UsuariosModel = require('../models/UsuariosModel');
+const EnderecosModel = require('../models/EnderecosModel');
 
 const UsuariosController = {
     createUser: (req, res)=>{
@@ -13,7 +13,7 @@ const UsuariosController = {
             ()=>{
                     return res.status(201).json({
                         erroStatus:false,
-                        mensagemStatus:"PARABÉNS, CADASTRADO REALIZADO !!!"
+                        mensagemStatus:"PARABÉNS, CADASTRO REALIZADO !!!"
                     });
             }
         )
@@ -27,26 +27,22 @@ const UsuariosController = {
              }
         )
     },
-    getUser:(req, res)=>{
+    getUser: (req, res) => {
         UsuariosModel.findAll()
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"USUÁRIOS LISTADOS COM SUCESSO !!!",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR USUÁRIOS.",
-                    errorObject:error
-                });
-            }
-        )
+        .then((response) => {
+          return res.status(200).json({
+            erroStatus: false,
+            mensagemStatus: "USUÁRIOS LISTADOS COM SUCESSO !!!",
+            data:response
+          });
+        })
+        .catch((error) => {
+          return res.status(400).json({
+            erroStatus: true,
+            mensagemStatus: "ERRO AO LISTAR USUÁRIOS.",
+            errorObject: error
+          });
+        })
     },
     getUserEmail:(req, res)=>{
         let{email_Usuarios} = req.params;
@@ -78,6 +74,29 @@ const UsuariosController = {
                 return res.status(200).json({
                     erroStatus:false,
                     mensagemStatus:"USÚARIO LISTADO POR CPF.",
+                    data:response
+                });
+            }
+        )
+        .catch(
+            (error)=>{
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO LISTAR USÚARIO POR CPF.",
+                    errorObject:error
+                });
+            }
+        )
+    },
+    getUserCpfAll:(req, res)=>{
+        let{cpf_Usuarios} = req.params;
+        UsuariosModel.findOne({attributes:['cpf_Usuarios', 'nome_Usuarios', 'dataNasc_Usuarios', 'telefone_Usuarios',
+        'email_Usuarios', 'senha_Usuarios' ], where:{cpf_Usuarios}})
+        .then(
+            (response)=>{
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:"USÚARIO LISTADO POR CPF RETORNANDO TODOS ATRIBUTOS.",
                     data:response
                 });
             }

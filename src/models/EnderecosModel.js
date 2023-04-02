@@ -1,5 +1,6 @@
 //IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
+const UsuariosModel = require('./UsuariosModel');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');
@@ -44,5 +45,7 @@ const EnderecosModel = connection.define ('tbl_Enderecos',
         allowNull: false
     }
 });
+
+//EnderecosModel.belongsTo(UsuariosModel, { foreignKey: 'id_usuario' });
 
 module.exports = EnderecosModel;

@@ -1,5 +1,6 @@
 //IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
+const DiaMedModel = require('./DiaMedModel');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');
@@ -28,5 +29,7 @@ const MedicamentosModel = connection.define('tbl_Medicamentos',
         allowNull: true
     }
 });
+
+//MedicamentosModel.belongsTo(DiaMedModel, { foreignKey: 'id_DiaMed' });
 
 module.exports = MedicamentosModel;
