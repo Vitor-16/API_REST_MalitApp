@@ -5,8 +5,8 @@ const EnderecosController = {
         let{cep_Enderecos, estado_Enderecos, cidade_Enderecos,
         bairro_Enderecos, logradouro_Enderecos, numero_Enderecos} = req.body
         EnderecosModel.create({cep_Enderecos, estado_Enderecos, cidade_Enderecos,
-        bairro_Enderecos, logradouro_Enderecos, numero_Enderecos}
-        )
+        bairro_Enderecos, logradouro_Enderecos, numero_Enderecos
+        })
         .then(
             ()=>{
                     return res.status(201).json({

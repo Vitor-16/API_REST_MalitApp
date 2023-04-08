@@ -1,5 +1,6 @@
 //IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
+const EnderecosModel = require('./EnderecosModel');
 const bcrypt = require('bcrypt');   
 
 //CONEXÃO COM BD
@@ -58,17 +59,19 @@ const UsuariosModel = connection.define('tbl_usuarios',
         len: [8, 20]
         }
     },
+    Enderecos_id:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    }
 }, {Sequelize});
 
-UsuariosModel.beforeSave(async (tbl_usuarios) => {
+/*UsuariosModel.beforeSave(async (tbl_usuarios) => {
     if (tbl_usuarios.changed('senha_Usuarios')) {
       const salt = await bcrypt.genSalt(10);
       tbl_usuarios.senha_Usuarios = await bcrypt.hash(tbl_usuarios.senha_Usuarios, salt);
     }
-});
+});*/
 
-//UsuariosModel.associate = (models) => {
-//    UsuariosModel.hasOne(models.EnderecosModel, { foreignKey: 'id_usuario' });
-//};
+UsuariosModel.belongsTo(EnderecosModel, {foreignKey: 'Enderecos_id', allowNull: false});
 
 module.exports = UsuariosModel;

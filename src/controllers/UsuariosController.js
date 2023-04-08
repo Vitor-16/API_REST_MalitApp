@@ -4,10 +4,10 @@ const EnderecosModel = require('../models/EnderecosModel');
 const UsuariosController = {
     createUser: (req, res)=>{
         let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios,
-        email_Usuarios, senha_Usuarios} = req.body
+        email_Usuarios, senha_Usuarios, Enderecos_id} = req.body
         UsuariosModel.create(
         {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios,
-        email_Usuarios, senha_Usuarios}
+        email_Usuarios, senha_Usuarios, Enderecos_id}
         )
         .then(
             ()=>{
@@ -28,7 +28,14 @@ const UsuariosController = {
         )
     },
     getUser: (req, res) => {
-        UsuariosModel.findAll()
+        UsuariosModel.findAll({
+            order: [['id_Usuarios', 'DESC']],
+            include: [{
+                attributes: ['cep_Enderecos', 'estado_Enderecos', 'cidade_Enderecos', 
+                'bairro_Enderecos', 'numero_Enderecos'],
+                model: EnderecosModel 
+            }]
+        })
         .then((response) => {
           return res.status(200).json({
             erroStatus: false,
@@ -46,7 +53,8 @@ const UsuariosController = {
     },
     getUserEmail:(req, res)=>{
         let{email_Usuarios} = req.params;
-        UsuariosModel.findOne({attributes:['email_Usuarios', 'senha_Usuarios'], where:{email_Usuarios}})
+        UsuariosModel.findOne({attributes:['email_Usuarios', 'senha_Usuarios'], where:{email_Usuarios}}
+        )
         .then(
             (response)=>{
                 return res.status(200).json({
