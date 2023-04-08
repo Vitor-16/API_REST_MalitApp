@@ -61,7 +61,7 @@ const UsuariosModel = connection.define('tbl_usuarios',
     },
     Enderecos_id:{
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     }
 }, {Sequelize});
 
@@ -72,6 +72,6 @@ const UsuariosModel = connection.define('tbl_usuarios',
     }
 });*/
 
-UsuariosModel.belongsTo(EnderecosModel, {foreignKey: 'Enderecos_id', allowNull: false});
+UsuariosModel.belongsTo(EnderecosModel, {foreignKey: 'Enderecos_id', allowNull: true});
 
 module.exports = UsuariosModel;

@@ -17,8 +17,4 @@ const DiaMedModel = connection.define('tbl_Data',
     }
 });
 
-//DiaMedModel.associate = (models) => {
-//    hasMany(models.MedicamentosModel, { foreignKey: 'id_DiaMed' })
-//};
-
 module.exports = DiaMedModel;
