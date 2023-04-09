@@ -1,5 +1,7 @@
 //IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
+const MedicamentosModel = require('./MedicamentosModel');
+const UsuariosModel = require('./UsuariosModel');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');

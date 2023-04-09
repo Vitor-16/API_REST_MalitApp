@@ -2,6 +2,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const DiaMedModel = require('./DiaMedModel');
 const HoraMedModel = require('./HoraMedModel');
+const UsuariosModel = require('./UsuariosModel');
+const UsuariosMedModel = require('./UsuariosMedModel');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');

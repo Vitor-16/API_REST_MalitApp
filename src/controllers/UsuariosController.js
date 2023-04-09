@@ -1,13 +1,14 @@
 const UsuariosModel = require('../models/UsuariosModel');
 const EnderecosModel = require('../models/EnderecosModel');
+const MedicamentosModel = require('../models/MedicamentosModel');
 
 const UsuariosController = {
     createUser: (req, res)=>{
         let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios,
-        email_Usuarios, senha_Usuarios, Enderecos_id} = req.body
+        email_Usuarios, senha_Usuarios} = req.body
         UsuariosModel.create(
         {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios,
-        email_Usuarios, senha_Usuarios, Enderecos_id}
+        email_Usuarios, senha_Usuarios}
         )
         .then(
             ()=>{
