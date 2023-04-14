@@ -121,10 +121,10 @@ const UsuariosController = {
         )
     },
     putUser:(req, res)=>{
-        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios} = req.body;
+        let{nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios} = req.body;
         const{id_Usuarios} = req.params;
         UsuariosModel.update(
-            {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios, senha_Usuarios},
+            {nome_Usuarios, cpf_Usuarios, dataNasc_Usuarios, telefone_Usuarios, email_Usuarios},
             {where:{id_Usuarios}}
         )
         .then(
@@ -140,6 +140,31 @@ const UsuariosController = {
                 return res.status(400).json({
                     erroStatus:true,
                     mensagemStatus:"ERRO AO ALTERAR SEUS DADOS.",
+                    errorObject:error
+                });
+            }
+        )
+    },
+    putUserPassword:(req, res)=>{
+        let{senha_Usuarios} = req.body;
+        const{cpf_Usuarios} = req.params;
+        UsuariosModel.update(
+            {senha_Usuarios},
+            {where:{cpf_Usuarios}}
+        )
+        .then(
+            ()=>{
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:"SENHA ALTERADA COM SUCESSO!!!"
+                });
+            }
+        )
+        .catch(
+            (error)=>{
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO ALTERAR SENHA.",
                     errorObject:error
                 });
             }

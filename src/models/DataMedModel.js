@@ -4,17 +4,21 @@ const { Sequelize, DataTypes } = require('sequelize');
 //CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const HoraMedModel = connection.define('tbl_Horarios',
+const DataMedModel = connection.define('tbl_Data',
 {
-    id_HoraMed:{
+    id_DataMed:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    hora_HoraMed:{
+    Dia_Med:{
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    Hora_Med:{
         type: DataTypes.TIME,
         allowNull: false
     }
 });
 
-module.exports = HoraMedModel;
+module.exports = DataMedModel;

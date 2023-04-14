@@ -1,13 +1,12 @@
 const MedicamentosModel = require('../models/MedicamentosModel');
-const DiaMedModel = require('../models/DiaMedModel');
-const HoraMedModel = require('../models/HoraMedModel');
+const DataMedModel = require('../models/DataMedModel');
 
 const MedicamentosController = {
     createMed: (req, res)=>{
         let{nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos, DiaMed_id, HoraMed_id} = req.body
+        quantidade_Medicamentos, validade_Medicamentos, DataMed_id} = req.body
         MedicamentosModel.create({nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos, DiaMed_id, HoraMed_id}
+        quantidade_Medicamentos, validade_Medicamentos, DataMed_id}
         )
         .then(
             ()=>{
@@ -31,12 +30,8 @@ const MedicamentosController = {
         MedicamentosModel.findAll({
             order: [['id_Medicamentos', 'DESC']],
             include: [{
-                attributes: ['data_DiaMed'],
-                model: DiaMedModel 
-            },
-            {
-                attributes: ['hora_HoraMed'],
-                model: HoraMedModel 
+                attributes: ['Dia_Med', 'Hora_Med'],
+                model: DataMedModel 
             }]
         })
         .then(

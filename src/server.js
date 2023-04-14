@@ -12,11 +12,10 @@ const PORT = 3333;
 const UsuariosRouter = require('./routes/UsuariosRouter');
 const MedicamentosRouter = require('./routes/MedicamentosRouter');
 const EnderecosRouter = require('./routes/EnderecosRouter');
-const DiaMedRouter = require('./routes/DiaMedRouter');
-const HoraMedRouter = require('./routes/HoraMedRouter');
+const DataMedRouter = require('./routes/DataMedRouter');
 const PedidosVendasRouter = require('./routes/PedidosVendasRouter');
 const MaletasProdRouter = require('./routes/MaletasProdRouter');
-const UsuariosMedRouter = require('./routes/UsuariosMedRouter');
+const UsuariosMedRouter = require('./routes/UsuariosMedRouter');          
 
 //MIDDLEWARES DE CORPO DE REQUISIÇÃO
 app.use(express.json());
@@ -27,8 +26,7 @@ app.use(cors());
 app.use('/', UsuariosRouter); 
 app.use('/', MedicamentosRouter);
 app.use('/', EnderecosRouter);
-app.use('/', DiaMedRouter);
-app.use('/', HoraMedRouter);
+app.use('/', DataMedRouter);    
 app.use('/', PedidosVendasRouter);
 app.use('/', MaletasProdRouter);
 app.use('/', UsuariosMedRouter);
