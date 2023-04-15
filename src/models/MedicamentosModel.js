@@ -30,12 +30,12 @@ const MedicamentosModel = connection.define('tbl_Medicamentos',
         type: DataTypes.DATEONLY,
         allowNull: true
     },
-    DataMed_id: {
+    dataMed_id: {
         type: Sequelize.INTEGER,
         allowNull: false
     }
 });
 
-MedicamentosModel.belongsTo(DataMedModel, {foreignKey: 'DataMed_id', allowNull: false});
+MedicamentosModel.belongsTo(DataMedModel, {foreignKey: 'dataMed_id', allowNull: false});
  
 module.exports = MedicamentosModel;

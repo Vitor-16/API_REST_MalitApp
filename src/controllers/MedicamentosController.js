@@ -4,9 +4,9 @@ const DataMedModel = require('../models/DataMedModel');
 const MedicamentosController = {
     createMed: (req, res)=>{
         let{nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos, DataMed_id} = req.body
+        quantidade_Medicamentos, validade_Medicamentos, dataMed_id} = req.body
         MedicamentosModel.create({nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos, DataMed_id}
+        quantidade_Medicamentos, validade_Medicamentos, dataMed_id}
         )
         .then(
             ()=>{
@@ -39,6 +39,34 @@ const MedicamentosController = {
                 return res.status(200).json({
                     erroStatus:false,
                     mensagemStatus:"MEDICAMENTOS LISTADOS COM SUCESSO.",
+                    data:response
+                });
+            }
+        )
+        .catch(
+            (error)=>{
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS.",
+                    errorObject:error
+                });
+            }
+        )
+    },
+    getMedLs:(req, res)=>{
+        MedicamentosModel.findAll({
+            attributes: ['nome_Medicamentos', 'quantidade_Medicamentos'],
+            order: [['id_Medicamentos', 'DESC']],
+            include: [{
+            model: DataMedModel,
+            attributes: ['Dia_Med', 'Hora_Med']
+            }]
+        })
+        .then(
+            (response)=>{
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:"MEDICAMENTOS LISTADOS COM SUCESSO COM ATRIBUTOS ESPECIFÍCOS.",
                     data:response
                 });
             }
