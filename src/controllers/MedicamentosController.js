@@ -105,8 +105,15 @@ const MedicamentosController = {
     },
     getMedNM:(req, res)=>{
         let{nome_Medicamentos} = req.params;
-        MedicamentosModel.findOne({attributes:['id_Medicamentos','nome_Medicamentos', 'descricao_Medicamentos', 
-        'quantidade_Medicamentos', 'validade_Medicamentos'], where:{nome_Medicamentos}})
+        MedicamentosModel.findOne({
+            attributes:['nome_Medicamentos', 'descricao_Medicamentos', 'quantidade_Medicamentos', 'validade_Medicamentos'], 
+            where:{nome_Medicamentos},
+            order: [['id_Medicamentos', 'DESC']],
+            include: [{
+              model: DataMedModel,
+              attributes: ['Dia_Med', 'Hora_Med']
+            }]
+          })
         .then(
             (response)=>{
                 return res.status(200).json({
@@ -128,11 +135,11 @@ const MedicamentosController = {
     },
     putMed:(req, res)=>{
         let{nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos} = req.body;
+        quantidade_Medicamentos, validade_Medicamentos, dataMed_id} = req.body;
         let{id_Medicamentos} = req.params;
         MedicamentosModel.update(
             {nome_Medicamentos, descricao_Medicamentos, 
-             quantidade_Medicamentos, validade_Medicamentos},
+             quantidade_Medicamentos, validade_Medicamentos, dataMed_id},
             {where:{id_Medicamentos}}
         )
         .then(
