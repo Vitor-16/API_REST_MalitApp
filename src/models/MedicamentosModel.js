@@ -1,6 +1,5 @@
 //IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
-const DataMedModel = require('./DataMedModel');
 const UsuariosModel = require('./UsuariosModel');
 const UsuariosMedModel = require('./UsuariosMedModel');
 
@@ -9,33 +8,35 @@ const connection = require('../config/connection');
 
 const MedicamentosModel = connection.define('tbl_Medicamentos',
 {
-    id_Medicamentos: {
+    id_Medicamento: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    nome_Medicamentos: {
+    nome_Medicamento: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    descricao_Medicamentos: {
+    descricao_Medicamento: {
         type: DataTypes.STRING,
         allowNull: true
     },
-    quantidade_Medicamentos: { 
+    quantidade_Medicamento: { 
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    validade_Medicamentos: {
+    validade_Medicamento: {
         type: DataTypes.DATEONLY,
         allowNull: true
     },
-    dataMed_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true
+    dia_Med:{
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    hora_Med:{
+        type: DataTypes.TIME,
+        allowNull: false
     }
 });
-
-MedicamentosModel.belongsTo(DataMedModel, {foreignKey: 'dataMed_id', allowNull: true});
  
 module.exports = MedicamentosModel;

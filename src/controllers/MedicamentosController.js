@@ -1,12 +1,11 @@
 const MedicamentosModel = require('../models/MedicamentosModel');
-const DataMedModel = require('../models/DataMedModel');
 
 const MedicamentosController = {
     createMed: (req, res)=>{
-        let{nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos, dataMed_id} = req.body
-        MedicamentosModel.create({nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos, dataMed_id}
+        let{nome_Medicamento, descricao_Medicamento, 
+        quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med} = req.body
+        MedicamentosModel.create({nome_Medicamento, descricao_Medicamento, 
+        quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med}
         )
         .then(
             ()=>{
@@ -27,13 +26,7 @@ const MedicamentosController = {
         )
     },
     getMed:(req, res)=>{
-        MedicamentosModel.findAll({
-            order: [['id_Medicamentos', 'DESC']],
-            include: [{
-                attributes: ['Dia_Med', 'Hora_Med'],
-                model: DataMedModel 
-            }]
-        })
+        MedicamentosModel.findAll()
         .then(
             (response)=>{
                 return res.status(200).json({
@@ -55,12 +48,8 @@ const MedicamentosController = {
     },
     getMedLs:(req, res)=>{
         MedicamentosModel.findAll({
-            attributes: ['nome_Medicamentos', 'quantidade_Medicamentos'],
-            order: [['id_Medicamentos', 'DESC']],
-            include: [{
-            model: DataMedModel,
-            attributes: ['Dia_Med', 'Hora_Med']
-            }]
+            attributes: ['nome_Medicamento', 'quantidade_Medicamento', 'dia_Med', 'hora_Med'],
+            order: [['id_Medicamento', 'DESC']]
         })
         .then(
             (response)=>{
@@ -82,8 +71,8 @@ const MedicamentosController = {
         )
     },
     getMedID:(req, res)=>{
-        let {id_Medicamentos} = req.params;
-        MedicamentosModel.findByPk(id_Medicamentos)
+        let {id_Medicamento} = req.params;
+        MedicamentosModel.findByPk(id_Medicamento)
         .then(
             (response)=>{
                 return res.status(200).json({
@@ -104,15 +93,10 @@ const MedicamentosController = {
         )
     },
     getMedNM:(req, res)=>{
-        let{nome_Medicamentos} = req.params;
+        let{nome_Medicamento} = req.params;
         MedicamentosModel.findOne({
-            attributes:['nome_Medicamentos', 'descricao_Medicamentos', 'quantidade_Medicamentos', 'validade_Medicamentos'], 
-            where:{nome_Medicamentos},
-            order: [['id_Medicamentos', 'DESC']],
-            include: [{
-              model: DataMedModel,
-              attributes: ['Dia_Med', 'Hora_Med']
-            }]
+            attributes:['nome_Medicamento', 'descricao_Medicamento', 'quantidade_Medicamento', 'validade_Medicamento'], 
+            where:{nome_Medicamento}
           })
         .then(
             (response)=>{
@@ -134,13 +118,13 @@ const MedicamentosController = {
         )
     },
     putMed:(req, res)=>{
-        let{nome_Medicamentos, descricao_Medicamentos, 
-        quantidade_Medicamentos, validade_Medicamentos, dataMed_id} = req.body;
-        let{id_Medicamentos} = req.params;
+        let{nome_Medicamento, descricao_Medicamento, 
+        quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med} = req.body;
+        let{id_Medicamento} = req.params;
         MedicamentosModel.update(
-            {nome_Medicamentos, descricao_Medicamentos, 
-             quantidade_Medicamentos, validade_Medicamentos, dataMed_id},
-            {where:{id_Medicamentos}}
+            {nome_Medicamento, descricao_Medicamento, 
+             quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med},
+            {where:{id_Medicamento}}
         )
         .then(
             ()=>{
@@ -161,11 +145,11 @@ const MedicamentosController = {
         )
     },
     destroyMed:(req, res)=>{
-        let{id_Medicamentos} = req.params;
-        MedicamentosModel.findByPk(id_Medicamentos)
+        let{id_Medicamento} = req.params;
+        MedicamentosModel.findByPk(id_Medicamento)
         .then((tbl_medicamentos)=>{
             if (tbl_medicamentos){
-                MedicamentosModel.destroy({where:{id_Medicamentos}})
+                MedicamentosModel.destroy({where:{id_Medicamento}})
                 .then(()=>{
                     return res.status(200).json({
                         erroStatus:false,

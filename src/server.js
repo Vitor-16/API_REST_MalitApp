@@ -12,7 +12,6 @@ const PORT = 3333;
 const UsuariosRouter = require('./routes/UsuariosRouter');
 const MedicamentosRouter = require('./routes/MedicamentosRouter');
 const EnderecosRouter = require('./routes/EnderecosRouter');
-const DataMedRouter = require('./routes/DataMedRouter');
 const PedidosVendasRouter = require('./routes/PedidosVendasRouter');
 const MaletasProdRouter = require('./routes/MaletasProdRouter');
 const UsuariosMedRouter = require('./routes/UsuariosMedRouter');          
@@ -25,8 +24,7 @@ app.use(cors());
 //UTILIZANDO AS ROTAS
 app.use('/', UsuariosRouter); 
 app.use('/', MedicamentosRouter);
-app.use('/', EnderecosRouter);
-app.use('/', DataMedRouter);    
+app.use('/', EnderecosRouter);    
 app.use('/', PedidosVendasRouter);
 app.use('/', MaletasProdRouter);
 app.use('/', UsuariosMedRouter);
