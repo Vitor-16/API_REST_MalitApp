@@ -1,38 +1,32 @@
+const UsuariosMedModel = require('../models/UsuariosMedModel');
 const UsuariosModel = require('../models/UsuariosModel');
 const MedicamentosModel = require('../models/MedicamentosModel');
-const UsuariosMedModel = require('../models/UsuariosMedModel');
 
 const UsuariosMedController = {
-    createUserMed: (req, res)=>{
-        let{id_UsuariosMed} = req.body
-        UsuariosMedModel.create(
-        {id_UsuariosMed}
-        )
-        .then(
-            ()=>{
-                    return res.status(201).json({
-                        erroStatus:false,
-                        mensagemStatus:"PARABÉNS, TABELA INTERMEDIÁRIA CRIADA !!!"
-                    });
-            }
-        )
-        .catch(
-            (error)=>{
-                    return res.status(400).json({
-                        erroStatus:true,
-                        mensagemStatus:"ERRO AO CRIAR TABELA INTERMEDIÁRIA.",
-                        errorObject:error
-                    });
-             }
-        )
-    },
-    getUserMed:(req, res)=>{
+    createUsuariosMed(req, res) {
+        const { cpf_Usuarios, id_Medicamento } = req.body;
+        try {
+          const usuario = UsuariosModel.findOne({ where: { cpf_Usuarios } });
+          const medicamento = MedicamentosModel.findOne({ where: { id_Medicamento } });
+      
+          if (!usuario || !medicamento) {
+            return res.status(404).json({ message: 'Usuário ou Medicamento não encontrado' });
+          }
+      
+         UsuariosMedModel.create({ cpf_Usuarios, id_Medicamento });
+      
+          return res.status(201).json({ message: 'Relacionamento criado com sucesso!' });
+        } catch(error) {
+          return res.status(500).json({ message: 'Erro ao criar relacionamento', error });
+        }
+      },
+    getUsuariosMeds(req, res) {
         UsuariosMedModel.findAll()
         .then(
             (response)=>{
                 return res.status(200).json({
                     erroStatus:false,
-                    mensagemStatus:"TODAS OS DADOS DA TABELA INTERMEDIÁRIA LISTADAS !!!",
+                    mensagemStatus:"DADOS LISTADOS.",
                     data:response
                 });
             }
@@ -41,82 +35,13 @@ const UsuariosMedController = {
             (error)=>{
                 return res.status(400).json({
                     erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR DADOS DA TABELA INTERMEDIÁRIA.",
+                    mensagemStatus:"ERRO AO LISTAR DADOS.",
                     errorObject:error
                 });
             }
         )
-    },
-    getUserMedID:(req, res)=>{
-        let{id_UsuariosMed} = req.params;
-        UsuariosMedModel.findByPk({attributes:['id_UsuariosMed'], where:{id_UsuariosMed}})
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"DADOS DA TABELA INTERMEDIÁRIA LISTADOS POR ID.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR DADOS DA TABELA INTERMEDIÁRIA POR ID.",
-                    errorObject:error
-                });
-            }
-        )
-    },
-    putUserMed:(req, res)=>{
-        let{} = req.body;
-        const{id_UsuariosMed} = req.params;
-        UsuariosMedModel.update(
-            {},
-            {where:{id_UsuariosMed}}
-        )
-        .then(
-            ()=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"DADOS DA TABELA INTERMEDIÁRIA FORAM ATUALIZADOS COM SUCESSO !!!"
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO ALTERAR DADOS DA TABELA INTERMEDIÁRIA.",
-                    errorObject:error
-                });
-            }
-        )
-    },
-    destroyUserMed:(req, res)=>{
-        const{id_UsuariosMed} = req.params;
-        UsuariosMedModel.destroy(
-            {where:{id_UsuariosMed}}
-        )
-        .then(
-            ()=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"DADOS DA TABELA INTERMEDIÁRIA DELETADOS !!!",
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO NA EXCLUSÃO DOS DADOS DA TABELA INTERMEDIÁRIA.",
-                    errorObject:error
-                });
-            }
-        )
-    }
+      },
+      
 };
 
 module.exports = UsuariosMedController;

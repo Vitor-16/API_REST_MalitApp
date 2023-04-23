@@ -1,7 +1,5 @@
 //IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
-const UsuariosModel = require('./UsuariosModel');
-const UsuariosMedModel = require('./UsuariosMedModel');
 
 //CONEXÃO COM BD
 const connection = require('../config/connection');
@@ -38,5 +36,13 @@ const MedicamentosModel = connection.define('tbl_Medicamentos',
         allowNull: false
     }
 });
+
+MedicamentosModel.associate = (models)=>{
+    MedicamentosModel.belongsToMany(models.UsuariosModel, {
+        through: 'UsuariosMedModel',
+        as: 'UsuariosMedModel',
+        foreignKey: 'id_Medicamento'
+    });
+};
  
 module.exports = MedicamentosModel;

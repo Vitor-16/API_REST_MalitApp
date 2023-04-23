@@ -13,7 +13,7 @@ const UsuariosRouter = require('./routes/UsuariosRouter');
 const MedicamentosRouter = require('./routes/MedicamentosRouter');
 const EnderecosRouter = require('./routes/EnderecosRouter');
 const PedidosVendasRouter = require('./routes/PedidosVendasRouter');
-const MaletasProdRouter = require('./routes/MaletasProdRouter');
+const MaletasProdRouter = require('./routes/MaletasProdRouter');  
 const UsuariosMedRouter = require('./routes/UsuariosMedRouter');          
 
 //MIDDLEWARES DE CORPO DE REQUISIÇÃO
@@ -29,6 +29,6 @@ app.use('/', PedidosVendasRouter);
 app.use('/', MaletasProdRouter);
 app.use('/', UsuariosMedRouter);
 
-app.listen(PORT, ()=>console.log(`SERVIDOR RODANDO EM http://localhost:${PORT}`));
+app.listen(PORT, ()=>console.log(`SERVER: http://localhost:${PORT}`));
 
 

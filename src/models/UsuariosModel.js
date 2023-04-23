@@ -1,8 +1,6 @@
 //IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
 const EnderecosModel = require('./EnderecosModel');
-const MedicamentosModel = require('./MedicamentosModel');
-const UsuariosMedModel = require('./UsuariosMedModel');
 const bcrypt = require('bcrypt');   
 
 //CONEXÃO COM BD
@@ -73,6 +71,14 @@ const UsuariosModel = connection.define('tbl_usuarios',
       tbl_usuarios.senha_Usuarios = await bcrypt.hash(tbl_usuarios.senha_Usuarios, salt);
     }
 });*/
+
+UsuariosModel.associate = (models)=>{
+    UsuariosModel.belongsToMany(models.MedicamentosModel, {
+       through: 'UsuariosMedModel',
+       as: 'UsuariosMedModel',
+       foreignKey: 'cpf_Usuarios'
+    });
+};
 
 UsuariosModel.belongsTo(EnderecosModel, {foreignKey: 'Enderecos_id', allowNull: true});
 
