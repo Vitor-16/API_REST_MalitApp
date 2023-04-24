@@ -40,8 +40,7 @@ const UsuariosMedController = {
                 });
             }
         )
-      },
-      
+      }
 };
 
 module.exports = UsuariosMedController;

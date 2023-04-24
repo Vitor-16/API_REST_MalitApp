@@ -74,7 +74,7 @@ const UsuariosModel = connection.define('tbl_usuarios',
 
 UsuariosModel.associate = (models)=>{
     UsuariosModel.belongsToMany(models.MedicamentosModel, {
-       through: 'UsuariosMedModel',
+       through: require('./UsuariosMedModel'),
        as: 'UsuariosMedModel',
        foreignKey: 'cpf_Usuarios'
     });
