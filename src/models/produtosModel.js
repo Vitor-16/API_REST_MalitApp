@@ -1,28 +1,26 @@
-//IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
 
-//CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const MaletasProdModel = connection.define('tbl_MaletasProd',
+const produtosModel = connection.define('tbl_produtos',
 {
-    id_MaletasProd:{
+    id_produto:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    tamanho_MaletasProd:{
+    tamanho:{
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    quantidade_MaletasProd:{
+    quantidade:{
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    valor_MaletasProd:{
+    valor:{
         type: DataTypes.DECIMAL(10,2),
         allowNull: false
     }
 });
 
-module.exports = MaletasProdModel;
+module.exports = produtosModel;

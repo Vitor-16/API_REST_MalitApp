@@ -1,13 +1,13 @@
 const express = require('express');
-const EnderecosController = require('../controllers/EnderecosController');
+const enderecosController = require('../controllers/enderecosController');
 
-const EnderecosRouter = express.Router();
+const enderecosRouter = express.Router();
 
-EnderecosRouter.post('/CadastroEnderecos', EnderecosController.createEnderecos);
-EnderecosRouter.get('/ListagemEnderecos', EnderecosController.getEnderecos);
-EnderecosRouter.get('/ListagemEnderecosID/:id_Enderecos', EnderecosController.getEnderecosID);
-EnderecosRouter.get('/ListagemEnderecosCEP/:cep_Enderecos', EnderecosController.getEnderecosCEP);
-EnderecosRouter.put('/AtualizarEnderecos/:id_Enderecos', EnderecosController.putEnderecos);
-EnderecosRouter.delete('/DeletarEnderecos/:id_Enderecos', EnderecosController.destroyEnderecos);
+enderecosRouter.post('/CadastroEndereco', enderecosController.createEndereco);
+enderecosRouter.get('/ListagemEndereco', enderecosController.getEndereco);
+enderecosRouter.get('/ListagemEnderecoId/:id_endereco', enderecosController.getEnderecoId);
+enderecosRouter.get('/ListagemEnderecoCep/:cep', enderecosController.getEnderecoCep);
+enderecosRouter.put('/AtualizarEndereco/:id_endereco', enderecosController.putEndereco);
+enderecosRouter.delete('/DeletarEndereco/:id_endereco', enderecosController.destroyEndereco);
 
-module.exports = EnderecosRouter;
+module.exports = enderecosRouter;

@@ -1,48 +1,38 @@
-//IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
 
-//CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const MedicamentosModel = connection.define('tbl_Medicamentos',
+const medicamentosModel = connection.define('tbl_medicamentos',
 {
-    id_Medicamento: {
+    id_med: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    nome_Medicamento: {
+    nome_med: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    descricao_Medicamento: {
+    descricao: {
         type: DataTypes.STRING,
         allowNull: true
     },
-    quantidade_Medicamento: { 
+    quantidade: { 
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    validade_Medicamento: {
+    validade: {
         type: DataTypes.DATEONLY,
         allowNull: true
     },
-    dia_Med:{
+    data:{
         type: DataTypes.DATEONLY,
         allowNull: false
     },
-    hora_Med:{
+    hora:{
         type: DataTypes.TIME,
         allowNull: false
     }
 });
-
-MedicamentosModel.associate = (models)=>{
-    MedicamentosModel.belongsToMany(models.UsuariosModel, {
-        through: require('./UsuariosMedModel'),
-        as: 'UsuariosMedModel',
-        foreignKey: 'id_Medicamento'
-    });
-};
  
-module.exports = MedicamentosModel;
+module.exports = medicamentosModel;

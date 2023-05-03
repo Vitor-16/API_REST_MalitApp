@@ -1,23 +1,21 @@
-//IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
-const EnderecosModel = require('./EnderecosModel');
+const enderecosModel = require('./enderecosModel');
 const bcrypt = require('bcrypt');   
 
-//CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const UsuariosModel = connection.define('tbl_usuarios', 
+const usuariosModel = connection.define('tbl_usuarios', 
 {
-    id_Usuarios:{
+    id_usuario:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    nome_Usuarios:{
+    nome_usuario:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    cpf_Usuarios:{
+    cpf:{
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
@@ -25,26 +23,26 @@ const UsuariosModel = connection.define('tbl_usuarios',
             isCPF(cpf_Usuarios) {
                 const cpfPattern = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
                 if (!cpfPattern.test(cpf_Usuarios)) {
-                  throw new Error('CPF INSERIDO INVÁLIDO');
+                  throw new Error('CPF INVÁLIDO');
                 } 
             }  
         }
     },
-    dataNasc_Usuarios:{
+    dataNasc:{
         type: DataTypes.DATEONLY,
         allowNull: false,
         validate:{
             isDate: true
         }
     },
-    telefone_Usuarios:{
+    telefone:{
         type: DataTypes.STRING(20),
         allowNull: false,
         validate:{
             is: /^\(\d{2}\)\s\d{5}\-\d{4}$/
         }
     },
-    email_Usuarios:{
+    email:{
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
@@ -52,34 +50,25 @@ const UsuariosModel = connection.define('tbl_usuarios',
             isEmail: true
         }
     },
-    senha_Usuarios:{
+    senha:{
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
         len: [8, 20]
         }
-    },
-    Enderecos_id:{
-        type: Sequelize.INTEGER,
-        allowNull: true
     }
 }, {Sequelize});
 
-/*UsuariosModel.beforeSave(async (tbl_usuarios) => {
-    if (tbl_usuarios.changed('senha_Usuarios')) {
-      const salt = await bcrypt.genSalt(10);
-      tbl_usuarios.senha_Usuarios = await bcrypt.hash(tbl_usuarios.senha_Usuarios, salt);
+usuariosModel.beforeSave(async (tbl_usuarios)=> {
+    if (tbl_usuarios.changed('senha')) {
+      const salt = await bcrypt.genSalt();
+      tbl_usuarios.senha = await bcrypt.hash(tbl_usuarios.senha, salt);
     }
-});*/
+});
 
-UsuariosModel.associate = (models)=>{
-    UsuariosModel.belongsToMany(models.MedicamentosModel, {
-       through: require('./UsuariosMedModel'),
-       as: 'UsuariosMedModel',
-       foreignKey: 'cpf_Usuarios'
-    });
-};
+enderecosModel.hasMany( usuariosModel);
+usuariosModel.belongsTo(enderecosModel, {allowNull: true});
 
-UsuariosModel.belongsTo(EnderecosModel, {foreignKey: 'Enderecos_id', allowNull: true});
+module.exports =  usuariosModel;
 
-module.exports = UsuariosModel;
+

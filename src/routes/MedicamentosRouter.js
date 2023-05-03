@@ -1,15 +1,15 @@
 const express = require('express');
-const MedicamentosController = require('../controllers/MedicamentosController');
+const medicamentosController = require('../controllers/medicamentosController');
 
-const MedicamentosRouter = express.Router();
+const medicamentosRouter = express.Router();
 
-MedicamentosRouter.post('/CadastroMed', MedicamentosController.createMed);
-MedicamentosRouter.get('/ListagemMed', MedicamentosController.getMed);
-MedicamentosRouter.get('/ListagemMedLs', MedicamentosController.getMedLs);
-MedicamentosRouter.get('/ListagemMedID/:id_Medicamento', MedicamentosController.getMedID);
-MedicamentosRouter.get('/ListagemMedNOME/:nome_Medicamento', MedicamentosController.getMedNM);
-MedicamentosRouter.put('/AtualizarMed/:id_Medicamento', MedicamentosController.putMed);
-MedicamentosRouter.delete('/DeletarMed/:id_Medicamento', MedicamentosController.destroyMed);
+medicamentosRouter.post('/CadastroMed', medicamentosController.createMedicamento);
+medicamentosRouter.get('/ListagemMed', medicamentosController.getMedicamentos);
+medicamentosRouter.get('/ListagemMedLs', medicamentosController.getMedicamentoListagem);
+medicamentosRouter.get('/ListagemMedId/:id_med', medicamentosController.getMedicamentoId);
+medicamentosRouter.get('/ListagemMedNome/:nome_med', medicamentosController.getMedicamentoNome);
+medicamentosRouter.put('/AtualizarMed/:id_med', medicamentosController.putMedicamento);
+medicamentosRouter.delete('/DeletarMed/:id_med', medicamentosController.destroyMedicamento);
 
-module.exports = MedicamentosRouter;
+module.exports = medicamentosRouter;
 

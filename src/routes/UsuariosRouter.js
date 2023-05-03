@@ -1,15 +1,14 @@
 const express = require('express');
-const UsuariosController = require('../controllers/UsuariosController');
+const usuariosController = require('../controllers/usuariosController');
 
-const UsuariosRouter = express.Router();
+const usuariosRouter = express.Router();
 
-UsuariosRouter.post('/Cadastro', UsuariosController.createUser);
-UsuariosRouter.get('/Listagem', UsuariosController.getUser);
-UsuariosRouter.get('/ListagemEmail/:email_Usuarios', UsuariosController.getUserEmail);
-UsuariosRouter.get('/ListagemCPF/:cpf_Usuarios', UsuariosController.getUserCPF);
-UsuariosRouter.get('/ListagemCpfAll/:cpf_Usuarios', UsuariosController.getUserCpfAll);
-UsuariosRouter.put('/Atualizar/:id_Usuarios', UsuariosController.putUser);
-UsuariosRouter.put('/AlterarSenha/:cpf_Usuarios', UsuariosController.putUserPassword);
-UsuariosRouter.delete('/Deletar/:id_Usuarios', UsuariosController.destroyUser);
+usuariosRouter.post('/Cadastro', usuariosController.createUsuario);
+usuariosRouter.get('/Listagem', usuariosController.getUsuarios);
+usuariosRouter.get('/ListagemCpf/:cpf', usuariosController.getCpf);
+usuariosRouter.get('/ListagemCpfAll/:cpf', usuariosController.getCpfAll);
+usuariosRouter.put('/Alterar/:id_usuario', usuariosController.putUsuario);
+usuariosRouter.put('/AlterarSenha/:cpf', usuariosController.putSenha);
+usuariosRouter.delete('/Deletar/:id_usuario', usuariosController.destroyUsuario);
 
-module.exports = UsuariosRouter;
+module.exports = usuariosRouter;

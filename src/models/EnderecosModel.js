@@ -1,48 +1,46 @@
-//IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
 
-//CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const EnderecosModel = connection.define ('tbl_Enderecos',
+const enderecosModel = connection.define ('tbl_enderecos',
 {
-    id_Enderecos: {
+    id_endereco: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    cep_Enderecos: {
+    cep: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             isCepValidate(cep_Enderecos) {
                 const cepRegex = /^\d{5}-\d{3}$/;
                 if (!cepRegex.test(cep_Enderecos)) {
-                  throw new Error('CEP INSERIDO INVÁLIDO');
+                  throw new Error('CEP INVÁLIDO');
                 }
             }
         }
     },
-    estado_Enderecos: {
+    estado: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    cidade_Enderecos: {
+    cidade: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    bairro_Enderecos: {
+    bairro: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    logradouro_Enderecos: {
+    logradouro: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    numero_Enderecos: {
+    numero: {
         type: DataTypes.INTEGER,
         allowNull: false
     }
 });
 
-module.exports = EnderecosModel;
+module.exports = enderecosModel;

@@ -1,129 +1,129 @@
-const EnderecosModel = require('../models/EnderecosModel');
+const enderecosModel = require('../models/enderecosModel');
 
-const EnderecosController = {
-    createEnderecos: (req, res)=>{
-        let{cep_Enderecos, estado_Enderecos, cidade_Enderecos,
-        bairro_Enderecos, logradouro_Enderecos, numero_Enderecos} = req.body
-        EnderecosModel.create({cep_Enderecos, estado_Enderecos, cidade_Enderecos,
-        bairro_Enderecos, logradouro_Enderecos, numero_Enderecos
+const enderecosController = {
+    createEndereco: (req, res)=>{
+        let{cep, 
+            estado, 
+            cidade,
+            bairro, 
+            logradouro, 
+            numero} = req.body
+        enderecosModel.create(
+            {cep, 
+             estado, 
+             cidade,
+             bairro, 
+             logradouro, 
+             numero
         })
-        .then(
-            ()=>{
-                    return res.status(201).json({
-                        erroStatus:false,
-                        mensagemStatus:"ENDEREÇO CADASTRADO."
-                    });
-            }
-        )
-        .catch(
-            (error)=>{
-                    return res.status(400).json({
-                        erroStatus:true,
-                        mensagemStatus:"ERRO AO CADASTRAR SEU ENDEREÇO.",
-                        errorObject:error
-                    });
-             }
-        )
+        .then(()=>{
+            return res.status(201).json({
+                erroStatus:false,
+                mensagemStatus:"ENDEREÇO CADASTRADO."
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO CADASTRAR SEU ENDEREÇO.",
+                errorObject:error
+            });
+        })
     },
-    getEnderecos:(req, res)=>{
-        EnderecosModel.findAll()
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"ENDEREÇOS LISTADOS.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR ENDEREÇOS.",
-                    errorObject:error
-                });
-            }
-        )
+    getEndereco:(req, res)=>{
+        enderecosModel.findAll()
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"ENDEREÇOS LISTADOS.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR ENDEREÇOS.",
+                errorObject:error
+            });
+        })
     },
-    getEnderecosID:(req, res)=>{
-        let {id_Enderecos} = req.params;
-        EnderecosModel.findByPk(id_Enderecos)
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"ENDEREÇOS LISTADOS POR ID.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR ENDEREÇOS POR ID.",
-                    errorObject:error
-                });
-            }
-        )
+    getEnderecoId:(req, res)=>{
+        let {id_endereco} = req.params;
+        enderecosModel.findByPk(id_endereco)
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"ENDEREÇOS LISTADOS POR ID.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR ENDEREÇOS POR ID.",
+                errorObject:error
+            });
+        })
     },
-    getEnderecosCEP:(req, res)=>{
-        let{cep_Enderecos} = req.params;
-        EnderecosModel.findOne({attributes:['estado_Enderecos', 'cidade_Enderecos',
-        'bairro_Enderecos', 'logradouro_Enderecos', 'numero_Enderecos'], where:{cep_Enderecos}})
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"ENDEREÇOS LISTADOS POR CEP.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR ENDEREÇOS POR CEP.",
-                    errorObject:error
-                });
-            }
-        )
+    getEnderecoCep:(req, res)=>{
+        let{cep} = req.params;
+        enderecosModel.findOne({attributes:['estado',
+                                            'cidade',
+                                            'bairro', 
+                                            'logradouro', 
+                                            'numero'], where:{cep}})
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"ENDEREÇOS LISTADOS POR CEP.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR ENDEREÇOS POR CEP.",
+                errorObject:error
+            });
+        })
     },
-    putEnderecos:(req, res)=>{
-        let{cep_Enderecos, estado_Enderecos, cidade_Enderecos,
-        bairro_Enderecos, logradouro_Enderecos, numero_Enderecos} = req.body;
-        let{id_Enderecos} = req.params;
-        EnderecosModel.update(
-            {cep_Enderecos, estado_Enderecos, cidade_Enderecos,
-            bairro_Enderecos, logradouro_Enderecos, numero_Enderecos},
-            {where:{id_Enderecos}}
+    putEndereco:(req, res)=>{
+        let{cep, 
+            estado, 
+            cidade,
+            bairro, 
+            logradouro, 
+            numero} = req.body;
+        let{id_endereco} = req.params;
+        enderecosModel.update(
+            {cep, 
+             estado, 
+             cidade,
+             bairro, 
+             logradouro, 
+             numero},
+            {where:{id_endereco}}
         )
-        .then(
-            ()=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"DADOS DO SEU ENDEREÇO ATUALIZADOS COM SUCESSO."
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO ALTERAR SEU ENDEREÇO.",
-                    errorObject:error
-                });
-            }
-        )
+        .then(()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"DADOS DO SEU ENDEREÇO ATUALIZADOS COM SUCESSO."
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO ALTERAR SEU ENDEREÇO.",
+                errorObject:error
+            });
+        })
     },
-    destroyEnderecos:(req, res)=>{
-        let{id_Enderecos} = req.params;
-        EnderecosModel.findByPk(id_Enderecos)
-        .then((tbl_Enderecos)=>{
-            if (tbl_Enderecos){
-                EnderecosModel.destroy({where:{id_Enderecos}})
+    destroyEndereco:(req, res)=>{
+        let{id_endereco} = req.params;
+        enderecosModel.findByPk(id_endereco)
+        .then((tbl_enderecos)=>{
+            if (tbl_enderecos){
+                enderecosModel.destroy({where:{id_endereco}})
                 .then(()=>{
                     return res.status(200).json({
                         erroStatus:false,
@@ -154,4 +154,4 @@ const EnderecosController = {
     }
 };
 
-module.exports = EnderecosController;
+module.exports = enderecosController;

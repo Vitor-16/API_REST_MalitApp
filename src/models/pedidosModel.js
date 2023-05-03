@@ -1,28 +1,26 @@
-//IMPORTS
 const { Sequelize, DataTypes } = require('sequelize');
 
-//CONEXÃO COM BD
 const connection = require('../config/connection');
 
-const PedidosVendasModel = connection.define('tbl_PedidosVendas',
+const pedidosModel = connection.define('tbl_pedidos',
 {
-    id_Pedidos:{
+    id_pedido:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    status_Pedidos:{
+    status:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    valor_Pedidos:{
+    valor_pedido:{
         type: DataTypes.DECIMAL(10,2),
         allowNull: false
     },
-    formaPagamento_Pedidos:{
+    formaPagamento:{
         type: DataTypes.STRING,
         allowNull: false
     }
 });
 
-module.exports = PedidosVendasModel;
+module.exports = pedidosModel;

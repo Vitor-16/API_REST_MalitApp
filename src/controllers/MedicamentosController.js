@@ -1,155 +1,154 @@
-const MedicamentosModel = require('../models/MedicamentosModel');
+const medicamentosModel = require('../models/medicamentosModel');
 
-const MedicamentosController = {
-    createMed: (req, res)=>{
-        let{nome_Medicamento, descricao_Medicamento, 
-        quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med} = req.body
-        MedicamentosModel.create({nome_Medicamento, descricao_Medicamento, 
-        quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med}
+const medicamentosController = {
+    createMedicamento: (req, res)=>{
+        let{nome_med,
+            descricao,
+            quantidade, 
+            validade, 
+            data, 
+            hora} = req.body
+        medicamentosModel.create(
+            {nome_med,
+             descricao,
+             quantidade, 
+             validade, 
+             data, 
+             hora}
         )
-        .then(
-            ()=>{
-                    return res.status(201).json({
-                        erroStatus:false,
-                        mensagemStatus:"SEU MEDICAMENTO FOI CADASTRADO."
-                    });
-            }
-        )
-        .catch(
-            (error)=>{
-                    return res.status(400).json({
-                        erroStatus:true,
-                        mensagemStatus:"ERRO AO CADASTRAR MEDICAMENTO.",
-                        errorObject:error
-                    });
-             }
-        )
-    },
-    getMed:(req, res)=>{
-        MedicamentosModel.findAll()
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"MEDICAMENTOS LISTADOS COM SUCESSO.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS.",
-                    errorObject:error
-                });
-            }
-        )
-    },
-    getMedLs:(req, res)=>{
-        MedicamentosModel.findAll({
-            attributes: ['nome_Medicamento', 'quantidade_Medicamento', 'dia_Med', 'hora_Med'],
-            order: [['id_Medicamento', 'DESC']]
+        .then(()=>{
+            return res.status(201).json({
+                erroStatus:false,
+                mensagemStatus:"MEDICAMENTO CADASTRADO."
+            });
         })
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"MEDICAMENTOS LISTADOS COM SUCESSO COM ATRIBUTOS ESPECIFÍCOS.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS.",
-                    errorObject:error
-                });
-            }
-        )
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO CADASTRAR MEDICAMENTO.",
+                errorObject:error
+            });
+        })
     },
-    getMedID:(req, res)=>{
-        let {id_Medicamento} = req.params;
-        MedicamentosModel.findByPk(id_Medicamento)
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"MEDICAMENTOS LISTADOS POR ID.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS POR ID.",
-                    errorObject:error
-                });
-            }
-        )
+    getMedicamentos:(req, res)=>{
+        medicamentosModel.findAll()
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"MEDICAMENTOS LISTADOS COM SUCESSO.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS.",
+                errorObject:error
+            });
+        })
     },
-    getMedNM:(req, res)=>{
-        let{nome_Medicamento} = req.params;
-        MedicamentosModel.findOne({
-            attributes:['nome_Medicamento', 'descricao_Medicamento', 'quantidade_Medicamento', 'validade_Medicamento'], 
-            where:{nome_Medicamento}
+    getMedicamentoListagem:(req, res)=>{
+        medicamentosModel.findAll({
+            attributes: ['nome_med',
+                         'quantidade',
+                         'data', 
+                         'hora'],
+            order: [['id_med', 'DESC']]
+        })
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"MEDICAMENTOS COM ATRIBUTOS ESPECIFÍCOS LISTADOS COM SUCESSO .",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS.",
+                errorObject:error
+            });
+        })
+    },
+    getMedicamentoId:(req, res)=>{
+        let {id_med} = req.params;
+        medicamentosModel.findByPk(id_med)
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"MEDICAMENTOS LISTADOS POR ID.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS POR ID.",
+                errorObject:error
+            });
+        })
+    },
+    getMedicamentoNome:(req, res)=>{
+        let{nome_med} = req.params;
+        medicamentosModel.findOne({
+            attributes:['nome_med', 
+                        'descricao', 
+                        'quantidade', 
+                        'validade'], 
+            where:{nome_med}
           })
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"MEDICAMENTOS LISTADOS POR NOME.",
-                    data:response
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS POR NOME.",
-                    errorObject:error
-                });
-            }
-        )
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"MEDICAMENTOS LISTADOS POR NOME.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS POR NOME.",
+                errorObject:error
+            });
+        })
     },
-    putMed:(req, res)=>{
-        let{nome_Medicamento, descricao_Medicamento, 
-        quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med} = req.body;
-        let{id_Medicamento} = req.params;
-        MedicamentosModel.update(
-            {nome_Medicamento, descricao_Medicamento, 
-             quantidade_Medicamento, validade_Medicamento, dia_Med, hora_Med},
-            {where:{id_Medicamento}}
+    putMedicamento:(req, res)=>{
+        let{nome_med, 
+            descricao, 
+            quantidade, 
+            validade, 
+            data, 
+            hora} = req.body;
+        let{id_med} = req.params;
+        medicamentosModel.update(
+            {nome_med, 
+             descricao, 
+             quantidade, 
+             validade, 
+             data, 
+             hora},
+            {where:{id_med}}
         )
-        .then(
-            ()=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"DADOS DE MEDICAMENTO ATUALIZADOS COM SUCESSO."
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO ALTERAR MEDICAMENTO.",
-                    errorObject:error
-                });
-            }
-        )
+        .then(()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"DADOS DE MEDICAMENTO ATUALIZADOS COM SUCESSO."
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO ALTERAR MEDICAMENTO.",
+                errorObject:error
+            });
+        })
     },
-    destroyMed:(req, res)=>{
-        let{id_Medicamento} = req.params;
-        MedicamentosModel.findByPk(id_Medicamento)
+    destroyMedicamento:(req, res)=>{
+        let{id_med} = req.params;
+        medicamentosModel.findByPk(id_med)
         .then((tbl_medicamentos)=>{
             if (tbl_medicamentos){
-                MedicamentosModel.destroy({where:{id_Medicamento}})
+                medicamentosModel.destroy({where:{id_med}})
                 .then(()=>{
                     return res.status(200).json({
                         erroStatus:false,
@@ -180,4 +179,4 @@ const MedicamentosController = {
     }
 };
 
-module.exports = MedicamentosController;
+module.exports = medicamentosController;

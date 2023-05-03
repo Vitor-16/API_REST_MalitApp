@@ -1,27 +1,48 @@
-const UsuariosMedModel = require('../models/UsuariosMedModel');
-const UsuariosModel = require('../models/UsuariosModel');
-const MedicamentosModel = require('../models/MedicamentosModel');
+const usuariosMedModel = require('../models/usuariosMedModel');
+const usuariosModel = require('../models/usuariosModel');
+const medicamentosModel = require('../models/medicamentosModel');
 
-const UsuariosMedController = {
+const usuariosMedController = {
     createUsuariosMed(req, res) {
-        const { cpf_Usuarios, id_Medicamento } = req.body;
-        try {
-          const usuario = UsuariosModel.findOne({ where: { cpf_Usuarios } });
-          const medicamento = MedicamentosModel.findOne({ where: { id_Medicamento } });
+        const {tblUserIdUser,
+               tblMedIdMed } = req.body;
+        usuariosMedModel.create(
+          {tblUserIdUser,
+          tblMedIdMed })
+          .then(
+              ()=>{
+                      return res.status(201).json({
+                          erroStatus:false,
+                          mensagemStatus:"PARABÉNS, CADASTRO REALIZADO !!!"
+                      });
+              }
+          )
+          .catch(
+              (error)=>{
+                      return res.status(400).json({
+                          erroStatus:true,
+                          mensagemStatus:"ERRO AO SE CADASTRAR.",
+                          errorObject:error
+                      });
+               }
+          )
+        /*try {
+          const usuario = UsuariosModel.findOne({ where: { id_User } });
+          const medicamento = MedicamentosModel.findOne({ where: { id_Med } });
       
           if (!usuario || !medicamento) {
-            return res.status(404).json({ message: 'Usuário ou Medicamento não encontrado' });
+            return res.status(404).json({ mensagemStatus: 'Usuário ou Medicamento não encontrado' });
           }
       
-         UsuariosMedModel.create({ cpf_Usuarios, id_Medicamento });
+         UsuariosMedModel.create({ id_User, id_Med });
       
-          return res.status(201).json({ message: 'Relacionamento criado com sucesso!' });
+          return res.status(201).json({ mensagemStatus: 'Relacionamento criado com sucesso!' });
         } catch(error) {
-          return res.status(500).json({ message: 'Erro ao criar relacionamento', error });
-        }
+          return res.status(400).json({ mensagemStatus: 'Erro ao criar relacionamento', error });
+        }*/
       },
     getUsuariosMeds(req, res) {
-        UsuariosMedModel.findAll()
+        usuariosMedModel.findAll()
         .then(
             (response)=>{
                 return res.status(200).json({
@@ -43,4 +64,4 @@ const UsuariosMedController = {
       }
 };
 
-module.exports = UsuariosMedController;
+module.exports = usuariosMedController;
