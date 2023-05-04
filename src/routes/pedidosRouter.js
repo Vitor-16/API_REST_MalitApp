@@ -1,12 +1,12 @@
 const express = require('express');
-const PedidosVendasController = require('../controllers/pedidosController');
+const pedidosController = require('../controllers/pedidosController');
 
-const PedidosVendasRouter = express.Router();
+const pedidosRouter = express.Router();
 
-PedidosVendasRouter.post('/CadastrarPedido', PedidosVendasController.createPedidos);
-PedidosVendasRouter.get('/ListagemPedido', PedidosVendasController.getPedidos);
-PedidosVendasRouter.get('/ListagemPedidoID/:id_Pedidos', PedidosVendasController.getPedidosID);
-PedidosVendasRouter.put('/AtualizarPedido/:id_Pedidos', PedidosVendasController.putPedidos);
-PedidosVendasRouter.delete('/DeletarPedido/:id_Pedidos', PedidosVendasController.destroyPedidos);
+pedidosRouter.post('/CadastrarPedido', pedidosController.createPedido);
+pedidosRouter.get('/ListagemPedido', pedidosController.getPedidos);
+pedidosRouter.get('/ListagemPedidoID/:id_Pedidos', pedidosController.getPedidoId);
+pedidosRouter.put('/AtualizarPedido/:id_Pedidos', pedidosController.putPedido);
+pedidosRouter.delete('/DeletarPedido/:id_Pedidos', pedidosController.destroyPedido);
 
-module.exports = PedidosVendasRouter;
+module.exports = pedidosRouter;

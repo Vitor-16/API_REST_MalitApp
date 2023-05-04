@@ -1,38 +1,37 @@
-const ProdutosVendasModel = require('../models/pedidosModel');
+const pedidosModel = require('../models/pedidosModel');
 
-const PedidosVendasController = {
-    createPedidos: (req, res)=>{
-        let{status_Pedidos, valor_Pedidos, formaPagamento_Pedidos} = req.body
-        ProdutosVendasModel.create({status_Pedidos, valor_Pedidos, formaPagamento_Pedidos})
-        .then(
-            ()=>{
-                return res.status(201).json({
-                    erroStatus:false,
-                    mensagemStatus:"SEU PEDIDO FOI REGISTRADO.",
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
+const pedidosController = {
+    createPedido: (req, res)=>{
+        let{status, 
+            valor_pedido, 
+            formaPagamento} = req.body
+        pedidosModel.create(
+            {status, 
+             valor_pedido, 
+             formaPagamento})
+        .then(()=>{
+            return res.status(201).json({
+                erroStatus:false,
+                mensagemStatus:"SEU PEDIDO FOI REGISTRADO.",
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
                     mensagemStatus:"ERRO AO REGISTRAR PEDIDO.",
                     errorObject:error
-                });
-             }
-        )
+            });
+        })
     },
     getPedidos:(req, res)=>{
-        ProdutosVendasModel.findAll()
-        .then(
-            (response)=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"PEDIDOS LISTADOS COM SUCESSO.",
-                    data:response
-                });
-            }
-        )
+        pedidosModel.findAll()
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"PEDIDOS LISTADOS COM SUCESSO.",
+                data:response
+            });
+        })
         .catch(
             (error)=>{
                 return res.status(400).json({
@@ -43,9 +42,9 @@ const PedidosVendasController = {
             }
         )
     },
-    getPedidosID:(req, res)=>{
+    getPedidoId:(req, res)=>{
         let {id_Pedidos} = req.params;
-        ProdutosVendasModel.findByPk(id_Pedidos)
+        pedidosModel.findByPk(id_Pedidos)
         .then(
             (response)=>{
                 return res.status(200).json({
@@ -65,37 +64,37 @@ const PedidosVendasController = {
             }
         )
     },
-    putPedidos:(req, res)=>{
-        let{status_Pedidos, valor_Pedidos, formaPagamento_Pedidos} = req.body;
+    putPedido:(req, res)=>{
+        let{status, 
+            valor_pedido, 
+            formaPagamento} = req.body;
         let{id_Pedidos} = req.params;
-        ProdutosVendasModel.update(
-            {status_Pedidos, valor_Pedidos, formaPagamento_Pedidos},
+        pedidosModel.update(
+            {status, 
+             valor_pedido, 
+             formaPagamento},
             {where:{id_Pedidos}}
         )
-        .then(
-            ()=>{
-                return res.status(200).json({
-                    erroStatus:false,
-                    mensagemStatus:"DADOS DO SEU PEDIDO ATUALIZADOS COM SUCESSO."
-                });
-            }
-        )
-        .catch(
-            (error)=>{
-                return res.status(400).json({
-                    erroStatus:true,
-                    mensagemStatus:"ERRO AO ALTERAR DADOS DO SEU PEDIDO.",
-                    errorObject:error
-                });
-            }
-        )
+        .then(()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"PEDIDO ATUALIZADO COM SUCESSO."
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO ALTERAR PEDIDO.",
+                errorObject:error
+            });
+        })
     },
-    destroyPedidos:(req, res)=>{
+    destroyPedido:(req, res)=>{
         let{id_Pedidos} = req.params;
-        ProdutosVendasModel.findByPk(id_Pedidos)
+        pedidosModel.findByPk(id_Pedidos)
         .then((tbl_PedidosVendas)=>{
             if (tbl_PedidosVendas){
-                ProdutosVendasModel.destroy({where:{id_Pedidos}})
+                pedidosModel.destroy({where:{id_Pedidos}})
                 .then(()=>{
                     return res.status(200).json({
                         erroStatus:false,
@@ -126,4 +125,4 @@ const PedidosVendasController = {
     }
 };
 
-module.exports = PedidosVendasController;
+module.exports = pedidosController;
