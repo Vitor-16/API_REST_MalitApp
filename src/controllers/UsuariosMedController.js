@@ -1,6 +1,4 @@
 const usuariosMedModel = require('../models/UsuariosMedModel');
-const usuariosModel = require('../models/UsuariosModel');
-const medicamentosModel = require('../models/MedicamentosModel');
 
 const usuariosMedController = {
     createUsuariosMed(req, res) {
@@ -8,7 +6,7 @@ const usuariosMedController = {
                tblMedIdMed } = req.body;
         usuariosMedModel.create(
           {tblUserIdUser,
-          tblMedIdMed})
+           tblMedIdMed})
           .then(()=>{
               return res.status(201).json({
                     erroStatus:false,
@@ -22,20 +20,6 @@ const usuariosMedController = {
                     errorObject:error
               });
           })
-        /*try {
-          const usuario = UsuariosModel.findOne({ where: { id_User } });
-          const medicamento = MedicamentosModel.findOne({ where: { id_Med } });
-      
-          if (!usuario || !medicamento) {
-            return res.status(404).json({ mensagemStatus: 'Usuário ou Medicamento não encontrado' });
-          }
-      
-         UsuariosMedModel.create({ id_User, id_Med });
-      
-          return res.status(201).json({ mensagemStatus: 'Relacionamento criado com sucesso!' });
-        } catch(error) {
-          return res.status(400).json({ mensagemStatus: 'Erro ao criar relacionamento', error });
-        }*/
     },
     getUsuariosMeds(req, res) {
         usuariosMedModel.findAll()

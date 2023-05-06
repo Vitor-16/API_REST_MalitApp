@@ -146,8 +146,8 @@ const medicamentosController = {
     destroyMedicamento:(req, res)=>{
         let{id_med} = req.params;
         medicamentosModel.findByPk(id_med)
-        .then((tbl_medicamentos)=>{
-            if (tbl_medicamentos){
+        .then((Medicamentos)=>{
+            if (Medicamentos){
                 medicamentosModel.destroy({where:{id_med}})
                 .then(()=>{
                     return res.status(200).json({

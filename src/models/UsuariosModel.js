@@ -1,6 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const enderecosModel = require('./EnderecosModel');
-const bcrypt = require('bcrypt');   
 
 const connection = require('../config/Connection');
 
@@ -20,9 +19,9 @@ const usuariosModel = connection.define('Usuarios',
         allowNull: false,
         unique: true,
         validate:{
-            isCPF(cpf_Usuarios) {
+            isCPF(cpf) {
                 const cpfPattern = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-                if (!cpfPattern.test(cpf_Usuarios)) {
+                if (!cpfPattern.test(cpf)) {
                   throw new Error('CPF INVÁLIDO');
                 } 
             }  
@@ -54,17 +53,10 @@ const usuariosModel = connection.define('Usuarios',
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-        len: [8, 20]
+        len: [6, 80]
         }
     }
 }, {Sequelize});
-
-usuariosModel.beforeSave(async (tbl_usuarios)=> {
-    if (tbl_usuarios.changed('senha')) {
-      const salt = await bcrypt.genSalt();
-      tbl_usuarios.senha = await bcrypt.hash(tbl_usuarios.senha, salt);
-    }
-});
 
 enderecosModel.hasMany( usuariosModel);
 usuariosModel.belongsTo(enderecosModel, {allowNull: true});

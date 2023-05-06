@@ -121,8 +121,8 @@ const enderecosController = {
     destroyEndereco:(req, res)=>{
         let{id_endereco} = req.params;
         enderecosModel.findByPk(id_endereco)
-        .then((tbl_enderecos)=>{
-            if (tbl_enderecos){
+        .then((Enderecos)=>{
+            if (Enderecos){
                 enderecosModel.destroy({where:{id_endereco}})
                 .then(()=>{
                     return res.status(200).json({

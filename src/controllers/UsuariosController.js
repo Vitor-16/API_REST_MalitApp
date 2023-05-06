@@ -1,21 +1,27 @@
 const usuariosModel = require('../models/UsuariosModel');
 const enderecosModel = require('../models/EnderecosModel');
+const bcrypt = require('bcrypt');
+const saltRounds = 10; //define o número de rounds da criptografia usada em update se senha
 
 const usuariosController = {
-    createUsuario:(req, res)=>{
+    createUsuario: async (req, res)=>{
         let{nome_usuario,
             cpf, 
             dataNasc, 
             telefone,
             email, 
             senha} = req.body;
+        
+        const salt = await bcrypt.genSalt(10);
+        const senhaCriptografada = await bcrypt.hash(senha, salt);
+
         usuariosModel.create(
             {nome_usuario, 
              cpf, 
              dataNasc, 
              telefone,
              email, 
-             senha
+             senha : senhaCriptografada
         })
         .then(()=>{
             return res.status(201).json({
@@ -138,25 +144,36 @@ const usuariosController = {
         })
     },
     putSenha:(req, res)=>{
-        let{senha} = req.body;
-        const{cpf} = req.params;
-        usuariosModel.update(
-            {senha},
-            {where:{cpf}
-        })
-        .then(()=>{
-            return res.status(200).json({
-                erroStatus:false,
-                mensagemStatus:"SENHA ALTERADA COM SUCESSO!!!"
+        const {senha} = req.body;
+        const {cpf} = req.params;
+    
+        bcrypt.hash(senha, saltRounds, (err, hash) => {
+            if (err) {
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO CRIPTOGRAFAR SENHA.",
+                    errorObject: err
+                });
+            }
+    
+            usuariosModel.update(
+                {senha: hash},
+                {where: {cpf}}
+            )
+            .then(() => {
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:"SENHA ALTERADA COM SUCESSO!!!"
+                });
+            })
+            .catch((error) => {
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO ALTERAR SENHA.",
+                    errorObject:error
+                });
             });
-        })
-        .catch((error)=>{
-            return res.status(400).json({
-                erroStatus:true,
-                mensagemStatus:"ERRO AO ALTERAR SENHA.",
-                errorObject:error
-            });
-        })
+        });
     },
     destroyUsuario:(req, res)=>{
         const{id_usuario} = req.params;

@@ -92,8 +92,8 @@ const pedidosController = {
     destroyPedido:(req, res)=>{
         let{id_Pedidos} = req.params;
         pedidosModel.findByPk(id_Pedidos)
-        .then((tbl_PedidosVendas)=>{
-            if (tbl_PedidosVendas){
+        .then((Pedidos)=>{
+            if (Pedidos){
                 pedidosModel.destroy({where:{id_Pedidos}})
                 .then(()=>{
                     return res.status(200).json({

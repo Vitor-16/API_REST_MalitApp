@@ -1,4 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const usuariosModel = require('./UsuariosModel');
+const produtosModel = require('./ProdutosModel');
 
 const connection = require('../config/Connection');
 
@@ -22,5 +24,8 @@ const pedidosModel = connection.define('Pedidos',
         allowNull: false
     }
 });
+
+usuariosModel.belongsToMany(produtosModel, { through: pedidosModel});
+produtosModel.belongsToMany(usuariosModel, { through: pedidosModel});
 
 module.exports = pedidosModel;
