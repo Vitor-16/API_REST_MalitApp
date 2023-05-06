@@ -1,10 +1,10 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const usuariosModel = require('./usuariosModel');
-const medicamentosModel = require('./medicamentosModel');
+const usuariosModel = require('./UsuariosModel');
+const medicamentosModel = require('./MedicamentosModel');
 
-const connection = require('../config/connection');
+const connection = require('../config/Connection');
 
-const usuariosMedModel = connection.define('tbl_usuariosMed',
+const usuariosMedModel = connection.define('UsuariosMedicamentos',
 {
   id: {
     type: DataTypes.INTEGER,

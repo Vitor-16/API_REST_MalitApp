@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-const connection = require('../config/connection');
+const connection = require('../config/Connection');
 
-const medicamentosModel = connection.define('tbl_medicamentos',
+const medicamentosModel = connection.define('Medicamentos',
 {
     id_med: {
         type: DataTypes.INTEGER,

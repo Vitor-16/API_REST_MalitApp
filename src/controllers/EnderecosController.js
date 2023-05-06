@@ -1,4 +1,4 @@
-const enderecosModel = require('../models/enderecosModel');
+const enderecosModel = require('../models/EnderecosModel');
 
 const enderecosController = {
     createEndereco: (req, res)=>{

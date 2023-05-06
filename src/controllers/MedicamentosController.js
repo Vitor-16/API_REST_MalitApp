@@ -1,4 +1,4 @@
-const medicamentosModel = require('../models/medicamentosModel');
+const medicamentosModel = require('../models/MedicamentosModel');
 
 const medicamentosController = {
     createMedicamento: (req, res)=>{

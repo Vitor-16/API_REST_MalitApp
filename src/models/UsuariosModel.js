@@ -1,10 +1,10 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const enderecosModel = require('./enderecosModel');
+const enderecosModel = require('./EnderecosModel');
 const bcrypt = require('bcrypt');   
 
-const connection = require('../config/connection');
+const connection = require('../config/Connection');
 
-const usuariosModel = connection.define('tbl_usuarios', 
+const usuariosModel = connection.define('Usuarios', 
 {
     id_usuario:{
         type: DataTypes.INTEGER,

@@ -1,4 +1,4 @@
-const produtosModel = require('../models/produtosModel');
+const produtosModel = require('../models/ProdutosModel');
 
 const produtosController = {
     createProduto: (req, res)=>{

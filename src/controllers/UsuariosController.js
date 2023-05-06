@@ -1,5 +1,5 @@
-const usuariosModel = require('../models/usuariosModel');
-const enderecosModel = require('../models/enderecosModel');
+const usuariosModel = require('../models/UsuariosModel');
+const enderecosModel = require('../models/EnderecosModel');
 
 const usuariosController = {
     createUsuario:(req, res)=>{

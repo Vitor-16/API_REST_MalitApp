@@ -1,4 +1,4 @@
-const pedidosModel = require('../models/pedidosModel');
+const pedidosModel = require('../models/PedidosModel');
 
 const pedidosController = {
     createPedido: (req, res)=>{

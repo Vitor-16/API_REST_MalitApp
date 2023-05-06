@@ -1,6 +1,6 @@
-const usuariosMedModel = require('../models/usuariosMedModel');
-const usuariosModel = require('../models/usuariosModel');
-const medicamentosModel = require('../models/medicamentosModel');
+const usuariosMedModel = require('../models/UsuariosMedModel');
+const usuariosModel = require('../models/UsuariosModel');
+const medicamentosModel = require('../models/MedicamentosModel');
 
 const usuariosMedController = {
     createUsuariosMed(req, res) {
