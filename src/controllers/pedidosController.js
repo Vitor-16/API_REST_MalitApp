@@ -4,11 +4,15 @@ const pedidosController = {
     createPedido: (req, res)=>{
         let{status, 
             valor_pedido, 
-            formaPagamento} = req.body
+            formaPagamento,
+            UsuarioIdUsuario,
+            ProdutoIdProduto} = req.body
         pedidosModel.create(
             {status, 
              valor_pedido, 
-             formaPagamento})
+             formaPagamento,
+             UsuarioIdUsuario,
+             ProdutoIdProduto})
         .then(()=>{
             return res.status(201).json({
                 erroStatus:false,
@@ -67,12 +71,16 @@ const pedidosController = {
     putPedido:(req, res)=>{
         let{status, 
             valor_pedido, 
-            formaPagamento} = req.body;
+            formaPagamento,
+            UsuarioIdUsuario,
+            ProdutoIdProduto} = req.body;
         let{id_Pedidos} = req.params;
         pedidosModel.update(
             {status, 
              valor_pedido, 
-             formaPagamento},
+             formaPagamento,
+             UsuarioIdUsuario,
+             ProdutoIdProduto},
             {where:{id_Pedidos}}
         )
         .then(()=>{

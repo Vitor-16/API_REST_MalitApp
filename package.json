@@ -1,7 +1,7 @@
 {
   "name": "api_malit",
   "version": "1.0.0",
-  "description": "",
+  "description": "projeto de TCC malit",
   "main": "server.js",
   "scripts": {
     "start": "node src/server.js",

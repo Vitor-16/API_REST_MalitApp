@@ -1,7 +1,7 @@
 const usuariosModel = require('../models/UsuariosModel');
 const enderecosModel = require('../models/EnderecosModel');
 const bcrypt = require('bcrypt');
-const saltRounds = 10; //define o número de rounds da criptografia usada em update se senha
+const saltRounds = 10; //define o número de rounds da criptografia usada em update de senha
 
 const usuariosController = {
     createUsuario: async (req, res)=>{
