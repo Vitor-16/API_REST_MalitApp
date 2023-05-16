@@ -7,14 +7,26 @@ const medicamentosController = {
             quantidade, 
             validade, 
             data, 
-            hora} = req.body
+            hora,
+            horaFirebase,
+            minutoFirebase,
+            diaFirebase,
+            mesFirebase,
+            intervaloFirebase,
+            horarioConsumoFirebase} = req.body
         medicamentosModel.create(
             {nome_med,
              descricao,
              quantidade, 
              validade, 
              data, 
-             hora}
+             hora,
+             horaFirebase,
+             minutoFirebase,
+             diaFirebase,
+             mesFirebase,
+             intervaloFirebase,
+             horarioConsumoFirebase}
         )
         .then(()=>{
             return res.status(201).json({
@@ -118,7 +130,13 @@ const medicamentosController = {
             quantidade, 
             validade, 
             data, 
-            hora} = req.body;
+            hora,
+            horaFirebase,
+            minutoFirebase,
+            diaFirebase,
+            mesFirebase,
+            intervaloFirebase,
+            horarioConsumoFirebase} = req.body;
         let{id_med} = req.params;
         medicamentosModel.update(
             {nome_med, 
@@ -126,7 +144,13 @@ const medicamentosController = {
              quantidade, 
              validade, 
              data, 
-             hora},
+             hora,
+             horaFirebase,
+             minutoFirebase,
+             diaFirebase,
+             mesFirebase,
+             intervaloFirebase,
+             horarioConsumoFirebase},
             {where:{id_med}}
         )
         .then(()=>{

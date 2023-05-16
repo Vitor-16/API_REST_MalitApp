@@ -32,6 +32,30 @@ const medicamentosModel = connection.define('Medicamentos',
     hora:{
         type: DataTypes.TIME,
         allowNull: false
+    },
+    horaFirebase:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    minutoFirebase:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    diaFirebase:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    mesFirebase:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    intervaloFirebase:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    horarioConsumoFirebase:{
+        type: DataTypes.STRING,
+        allowNull: true
     }
 });
  
