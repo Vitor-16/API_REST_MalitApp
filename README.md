@@ -8,6 +8,7 @@
 - NPM
 - Express
 - Bcrypt
+- Nodemailer
 - Cors
 - ESLint
 - Sequelize
