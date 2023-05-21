@@ -13,6 +13,7 @@ const usuariosMedRouter = require('./src/routes/UsuariosMedRouter');
 const enderecosRouter = require('./src/routes/EnderecosRouter');
 const produtosRouter = require('./src/routes/ProdutosRouter');
 const pedidosRouter = require('./src/routes/PedidosRouter');
+const recuperarSenhaRouter = require('./src/routes/RecuperarSenhaRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -25,6 +26,7 @@ app.use('/', usuariosMedRouter);
 app.use('/', enderecosRouter);  
 app.use('/', produtosRouter);
 app.use('/', pedidosRouter);
+app.use('/', recuperarSenhaRouter);
 
 app.listen(PORT, ()=>console.log(`Server is running in: http://localhost:${PORT}`));
 

@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
 const usuariosModel = require('../models/UsuariosModel');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   createLogin: async (req, res) => {
@@ -20,20 +20,20 @@ module.exports = {
       if (senhaCorreta) {
         return res.status(200).json({
           erroStatus: false,
-          mensagemStatus: 'LOGIN EFETUADO COM SUCESSO!',
+          mensagemStatus: 'LOGIN EFETUADO COM SUCESSO!'
         });
-      } else {
+      }else {
         return res.status(400).json({
           erroStatus: true,
-          mensagemStatus: 'SENHA INCORRETA',
+          mensagemStatus: 'SENHA INCORRETA'
         });
       }
-    } catch (error) {
-      return res.status(500).json({
-        erroStatus: true,
-        mensagemStatus: 'Erro ao fazer login',
-        errorObject: error,
-      });
+    }catch (error) {
+        return res.status(500).json({
+          erroStatus: true,
+          mensagemStatus: 'ERRO AO REALIZAR LOGIN',
+          errorObject: error
+        });
     }
-  },
+  }
 };
