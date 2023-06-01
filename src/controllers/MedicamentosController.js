@@ -121,6 +121,12 @@ const medicamentosController = {
             validade, 
             data, 
             hora,
+            horarioInicialFirebase,
+            minutoInicialFirebase,
+            diaInicialFirebase,
+            mesInicialFirebase,
+            intervaloHorasFirebase,
+            diasConsumoFirebase
         } = req.body;
         let{id_med} = req.params;
         medicamentosModel.update(
@@ -130,7 +136,12 @@ const medicamentosController = {
              validade, 
              data, 
              hora,
-            },
+             horarioInicialFirebase,
+            minutoInicialFirebase,
+            diaInicialFirebase,
+            mesInicialFirebase,
+            intervaloHorasFirebase,
+            diasConsumoFirebase},
             {where:{id_med}}
         )
         .then(()=>{
