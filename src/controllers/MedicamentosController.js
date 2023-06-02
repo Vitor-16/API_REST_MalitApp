@@ -8,6 +8,12 @@ const medicamentosController = {
             validade, 
             data, 
             hora,
+            horarioInicialFirebase,
+            minutoInicialFirebase,
+            diaInicialFirebase,
+            mesInicialFirebase,
+            intervaloHorasFirebase,
+            diasConsumoFirebase
         } = req.body
         medicamentosModel.create(
             {nome_med,
@@ -16,6 +22,12 @@ const medicamentosController = {
              validade, 
              data, 
              hora,
+             horarioInicialFirebase,
+             minutoInicialFirebase,
+             diaInicialFirebase,
+             mesInicialFirebase,
+             intervaloHorasFirebase,
+             diasConsumoFirebase
             }
         )
         .then(()=>{

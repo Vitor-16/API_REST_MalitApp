@@ -11,7 +11,7 @@ module.exports = {
       if (!usuario) {
         return res.status(400).json({
           erroStatus: true,
-          mensagemStatus: 'USUÁRIO NÃO ENCONTRADO',
+          mensagemStatus: "USUÁRIO NÃO ENCONTRADO.",
         });
       }
       
@@ -20,18 +20,18 @@ module.exports = {
       if (senhaCorreta) {
         return res.status(200).json({
           erroStatus: false,
-          mensagemStatus: 'LOGIN EFETUADO COM SUCESSO!'
+          mensagemStatus: "LOGIN EFETUADO COM SUCESSO!"
         });
       }else {
         return res.status(400).json({
           erroStatus: true,
-          mensagemStatus: 'SENHA INCORRETA'
+          mensagemStatus: "SENHA INCORRETA."
         });
       }
     }catch (error) {
         return res.status(500).json({
           erroStatus: true,
-          mensagemStatus: 'ERRO AO REALIZAR LOGIN',
+          mensagemStatus: "ERRO AO REALIZAR LOGIN.",
           errorObject: error
         });
     }

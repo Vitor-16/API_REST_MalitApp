@@ -32,19 +32,19 @@ module.exports = {
                     usuario.update({ senha }).then(() => {
                         return res.status(200).json({
                             erroStatus: false,
-                            mensagemStatus: 'EMAIL ENVIADO!'
+                            mensagemStatus: "EMAIL ENVIADO!"
                         });
                     }).catch(error => {
                         return res.status(404).json({
                             erroStatus: true,
-                            mensagemStatus: 'USUÁRIO NÃO ENCONTRADO',
+                            mensagemStatus: "USUÁRIO NÃO ENCONTRADO.",
                             errorObject: error
                         });
                     });
                 }).catch(error => {
                     return res.status(404).json({
                         erroStatus: true,
-                        mensagemStatus: 'FALHA AO ENVIAR EMAIL.',
+                        mensagemStatus: "FALHA AO ENVIAR EMAIL.",
                         errorObject: error
                     });
                 });
@@ -53,7 +53,7 @@ module.exports = {
         } catch (error) {
             return res.status(404).json({
                 erroStatus: true,
-                mensagemStatus: 'USUÁRIO NÃO ENCONTRADO',
+                mensagemStatus: "USUÁRIO NÃO ENCONTRADO.",
                 errorObject: error
             });
         }
