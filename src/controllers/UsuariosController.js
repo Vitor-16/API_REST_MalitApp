@@ -26,7 +26,7 @@ const usuariosController = {
         .then(()=>{
             return res.status(201).json({
                 erroStatus:false,
-                mensagemStatus:"CADASTRO REALIZADO !!!"
+                mensagemStatus:"CADASTRO REALIZADO!"
             });
         })
         .catch((error)=>{
@@ -52,7 +52,7 @@ const usuariosController = {
         .then((response) => {
           return res.status(200).json({
             erroStatus: false,
-            mensagemStatus: "USUÁRIOS LISTADOS COM SUCESSO !!!",
+            mensagemStatus: "USUÁRIOS LISTADOS COM SUCESSO!",
             data:response
           });
         })
@@ -132,7 +132,7 @@ const usuariosController = {
         .then(()=>{
             return res.status(200).json({
                 erroStatus:false,
-                mensagemStatus:"SEUS DADOS FORAM ATUALIZADOS COM SUCESSO !!!",
+                mensagemStatus:"SEUS DADOS FORAM ATUALIZADOS COM SUCESSO!",
             });
         })
         .catch((error)=>{
@@ -183,7 +183,7 @@ const usuariosController = {
         .then(()=>{
             return res.status(200).json({
                 erroStatus:false,
-                mensagemStatus:"USUÁRIO EXCLUÍDO !!!",
+                mensagemStatus:"USUÁRIO EXCLUÍDO.",
             });
         })
         .catch((error)=>{
