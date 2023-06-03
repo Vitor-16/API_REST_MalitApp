@@ -21,10 +21,6 @@ const medicamentosModel = connection.define('Medicamentos',
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    validade: {
-        type: DataTypes.DATEONLY,
-        allowNull: true
-    },
     data:{
         type: DataTypes.DATEONLY,
         allowNull: false

@@ -4,8 +4,7 @@ const medicamentosController = {
     createMedicamento: (req, res)=>{
         let{nome_med,
             descricao,
-            quantidade, 
-            validade, 
+            quantidade,  
             data, 
             hora,
             horarioInicialFirebase,
@@ -18,8 +17,7 @@ const medicamentosController = {
         medicamentosModel.create(
             {nome_med,
              descricao,
-             quantidade, 
-             validade, 
+             quantidade,
              data, 
              hora,
              horarioInicialFirebase,
@@ -107,8 +105,7 @@ const medicamentosController = {
         medicamentosModel.findOne({
             attributes:['nome_med', 
                         'descricao', 
-                        'quantidade', 
-                        'validade'], 
+                        'quantidade'], 
             where:{nome_med}
           })
         .then((response)=>{
@@ -129,8 +126,7 @@ const medicamentosController = {
     putMedicamento:(req, res)=>{
         let{nome_med, 
             descricao, 
-            quantidade, 
-            validade, 
+            quantidade,  
             data, 
             hora,
             horarioInicialFirebase,
@@ -144,8 +140,7 @@ const medicamentosController = {
         medicamentosModel.update(
             {nome_med, 
              descricao, 
-             quantidade, 
-             validade, 
+             quantidade,  
              data, 
              hora,
              horarioInicialFirebase,
