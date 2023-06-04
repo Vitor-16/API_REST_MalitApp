@@ -195,9 +195,10 @@ const medicamentosController = {
     },
     putMedCompartimento:(req, res)=>{
         let{ nome_med, CompartimentosFirebase } = req.body;
+        let{ id_med } = req.params;
         medicamentosModel.update(
             { nome_med, CompartimentosFirebase },
-            {where:{nome_med}}
+            {where:{id_med}}
         )
         .then(()=>{
             return res.status(200).json({

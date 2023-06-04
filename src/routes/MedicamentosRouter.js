@@ -10,7 +10,7 @@ medicamentosRouter.get('/ListagemMedId/:id_med', medicamentosController.getMedic
 medicamentosRouter.get('/ListagemMedNome/:nome_med', medicamentosController.getMedicamentoNome);
 medicamentosRouter.get('/ListagemMedCompartimento', medicamentosController.getMedListagemCompartimento);
 medicamentosRouter.put('/AtualizarMed/:id_med', medicamentosController.putMedicamento);
-medicamentosRouter.put('/AtualizarMedCompartimento', medicamentosController.putMedCompartimento);
+medicamentosRouter.put('/AtualizarMedCompartimento/:id_med', medicamentosController.putMedCompartimento);
 medicamentosRouter.delete('/DeletarMed/:id_med', medicamentosController.destroyMedicamento);
 
 module.exports = medicamentosRouter;
