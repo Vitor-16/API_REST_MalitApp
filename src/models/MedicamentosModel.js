@@ -52,6 +52,10 @@ const medicamentosModel = connection.define('Medicamentos',
     diasConsumoFirebase: {
         type: DataTypes.STRING,
         allowNull: true
+    },
+    CompartimentosFirebase: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     }
 });
  

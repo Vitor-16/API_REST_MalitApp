@@ -1,4 +1,5 @@
 const medicamentosModel = require('../models/MedicamentosModel');
+const { Op } = require('sequelize');
 
 const medicamentosController = {
     createMedicamento: (req, res)=>{
@@ -123,6 +124,31 @@ const medicamentosController = {
             });
         })
     },
+    getMedListagemCompartimento:(req, res)=>{
+        medicamentosModel.findAll({
+            attributes: ['nome_med', 'hora', 'CompartimentosFirebase'],
+                where: {
+                  CompartimentosFirebase: {
+                    [Op.not]: null // Verifica se o campo CompartimentosFirebase não esta nulo
+                  }
+                },
+                order: [['id_med', 'DESC']]
+        })
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"MEDICAMENTOS COM COMPARTIMENTO LISTADOS COM SUCESSO.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS COM COMPARTIMENTOS.",
+                errorObject:error
+            });
+        })
+    },
     putMedicamento:(req, res)=>{
         let{nome_med, 
             descricao, 
@@ -134,7 +160,8 @@ const medicamentosController = {
             diaInicialFirebase,
             mesInicialFirebase,
             intervaloHorasFirebase,
-            diasConsumoFirebase
+            diasConsumoFirebase,
+            CompartimentosFirebase
         } = req.body;
         let{id_med} = req.params;
         medicamentosModel.update(
@@ -148,7 +175,8 @@ const medicamentosController = {
             diaInicialFirebase,
             mesInicialFirebase,
             intervaloHorasFirebase,
-            diasConsumoFirebase},
+            diasConsumoFirebase,
+            CompartimentosFirebase},
             {where:{id_med}}
         )
         .then(()=>{
@@ -161,6 +189,26 @@ const medicamentosController = {
             return res.status(400).json({
                 erroStatus:true,
                 mensagemStatus:"ERRO AO ALTERAR MEDICAMENTO.",
+                errorObject:error
+            });
+        })
+    },
+    putMedCompartimento:(req, res)=>{
+        let{ nome_med, CompartimentosFirebase } = req.body;
+        medicamentosModel.update(
+            { nome_med, CompartimentosFirebase },
+            {where:{nome_med}}
+        )
+        .then(()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"ATRIBUIDO COMPARTIMENTO AO MEDICAMENTO."
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO ATRIBUIR COMPARTIMENTO.",
                 errorObject:error
             });
         })
