@@ -1,4 +1,5 @@
 const medicamentosModel = require('../models/MedicamentosModel');
+const { sequelize } = require('../models/MedicamentosModel');
 const { Op } = require('sequelize');
 
 const medicamentosController = {
@@ -126,7 +127,9 @@ const medicamentosController = {
     },
     getMedListagemCompartimento:(req, res)=>{
         medicamentosModel.findAll({
-            attributes: ['nome_med', 'hora', 'CompartimentosFirebase'],
+            attributes: ['id_med', 'nome_med', 'data', 'diasConsumoFirebase', 
+                         [sequelize.fn('SUBSTRING', sequelize.col('hora'), 1, 5), 'hora'], 
+                         'intervaloHorasFirebase', 'CompartimentosFirebase'],
                 where: {
                   CompartimentosFirebase: {
                     [Op.not]: null // Verifica se o campo CompartimentosFirebase não esta nulo
