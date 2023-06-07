@@ -23,7 +23,7 @@ module.exports = {
           mensagemStatus: "LOGIN EFETUADO COM SUCESSO!"
         });
       }else {
-        return res.status(400).json({
+        return res.status(401).json({
           erroStatus: true,
           mensagemStatus: "SENHA INCORRETA."
         });
