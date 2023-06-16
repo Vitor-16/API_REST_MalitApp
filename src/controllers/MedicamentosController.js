@@ -127,9 +127,8 @@ const medicamentosController = {
     },
     getMedListagemCompartimento:(req, res)=>{
         medicamentosModel.findAll({
-            attributes: ['id_med', 'nome_med', 'data', 'diasConsumoFirebase', 
-                         [sequelize.fn('SUBSTRING', sequelize.col('hora'), 1, 5), 'hora'], 
-                         'intervaloHorasFirebase', 'CompartimentosFirebase'],
+            attributes: ['id_med', 'nome_med', [sequelize.fn('SUBSTRING', sequelize.col('hora'), 1, 5), 'hora'], 
+                        'CompartimentosFirebase'],
                 where: {
                   CompartimentosFirebase: {
                     [Op.not]: null // Verifica se o campo CompartimentosFirebase não esta nulo
@@ -148,6 +147,56 @@ const medicamentosController = {
             return res.status(400).json({
                 erroStatus:true,
                 mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS COM COMPARTIMENTOS.",
+                errorObject:error
+            });
+        })
+    },
+    getMedListagemCalendario:(req, res)=>{
+        medicamentosModel.findAll({
+            attributes: ['id_med', 'data', 'diasConsumoFirebase'],
+                where: {
+                  CompartimentosFirebase: {
+                    [Op.not]: null
+                  }
+                },
+                order: [['id_med', 'DESC']]
+        })
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"DADOS DE MEDICAMENTO PARA O CALENDARIO LISTADOS.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR OS DADOS DE MEDICAMENTO PARA O CALENDARIO.",
+                errorObject:error
+            });
+        })
+    },
+    getMedListagemNullCompartimento:(req, res)=>{
+        medicamentosModel.findAll({
+            attributes: ['id_med', 'nome_med'],
+            where: {
+                CompartimentosFirebase: {
+                  [Op.is]: null // Verifica se o campo CompartimentosFirebase é nulo
+                }
+            },
+            order: [['id_med', 'DESC']]
+        })
+        .then((response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"MEDICAMENTOS SEM ATRIBUIÇÃO COMPARTIMENTO LISTADOS COM SUCESSO.",
+                data:response
+            });
+        })
+        .catch((error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR MEDICAMENTOS SEM ATRIBUIÇÃO COMPARTIMENTOS.",
                 errorObject:error
             });
         })
@@ -216,6 +265,41 @@ const medicamentosController = {
                 errorObject:error
             });
         })
+    },
+    destroyAttCompartimento: (req, res) => {
+        const { id_med } = req.params;
+      
+        medicamentosModel.findByPk(id_med)
+          .then((medicamento) => {
+            if (medicamento) {
+              medicamento.update({ CompartimentosFirebase: null })
+                .then(() => {
+                  return res.status(200).json({
+                    erroStatus: false,
+                    mensagemStatus: "VALOR DO CAMPO EXCLUÍDO COM SUCESSO."
+                  });
+                })
+                .catch((error) => {
+                  return res.status(400).json({
+                    erroStatus: true,
+                    mensagemStatus: "ERRO AO EXCLUIR VALOR DO CAMPO.",
+                    errorObject: error
+                  });
+                });
+            } else {
+              return res.status(404).json({
+                erroStatus: true,
+                mensagemStatus: "MEDICAMENTO NÃO ENCONTRADO."
+              });
+            }
+          })
+          .catch((error) => {
+            return res.status(400).json({
+              erroStatus: true,
+              mensagemStatus: "ERRO AO BUSCAR MEDICAMENTO.",
+              errorObject: error
+            });
+          });
     },
     destroyMedicamento:(req, res)=>{
         let{id_med} = req.params;

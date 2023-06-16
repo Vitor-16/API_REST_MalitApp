@@ -14,15 +14,15 @@ module.exports = {
                 host: "sandbox.smtp.mailtrap.io",
                 port: 2525,
                 auth: {
-                  user: "effa8f5f3a6254",
-                  pass: "********0b85"
+                  user: "07a7dac763c1bf",
+                  pass: "********c71d"
                 }
             });
 
             const novaSenha = crypto.randomBytes(10).toString('hex');
 
             transport.sendMail({
-                from: 'Admin <74d12af7fc-802a6e@inbox.mailtrap.io>',
+                from: 'Admin <4e53b319d9-36f8c9+1@inbox.mailtrap.io>',
                 to: email,
                 subject: 'Recuperação de senha!',
                 html: `<p>Olá, está é sua nova senha para acesso no seu app Malit: ${novaSenha}</p><br/>
