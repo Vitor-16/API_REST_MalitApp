@@ -128,9 +128,9 @@ const medicamentosController = {
     getMedListagemCompartimento:(req, res)=>{
         medicamentosModel.findAll({
             attributes: ['id_med', 'nome_med', [sequelize.fn('SUBSTRING', sequelize.col('hora'), 1, 5), 'hora'], 
-                        'CompartimentosFirebase'],
+                        'compartimentosFirebase'],
                 where: {
-                  CompartimentosFirebase: {
+                    compartimentosFirebase: {
                     [Op.not]: null // Verifica se o campo CompartimentosFirebase não esta nulo
                   }
                 },
@@ -155,7 +155,7 @@ const medicamentosController = {
         medicamentosModel.findAll({
             attributes: ['id_med', 'data', 'diasConsumoFirebase'],
                 where: {
-                  CompartimentosFirebase: {
+                    compartimentosFirebase: {
                     [Op.not]: null
                   }
                 },
@@ -180,7 +180,7 @@ const medicamentosController = {
         medicamentosModel.findAll({
             attributes: ['id_med', 'nome_med'],
             where: {
-                CompartimentosFirebase: {
+                  compartimentosFirebase: {
                   [Op.is]: null // Verifica se o campo CompartimentosFirebase é nulo
                 }
             },
@@ -213,7 +213,7 @@ const medicamentosController = {
             mesInicialFirebase,
             intervaloHorasFirebase,
             diasConsumoFirebase,
-            CompartimentosFirebase
+            compartimentosFirebase
         } = req.body;
         let{id_med} = req.params;
         medicamentosModel.update(
@@ -228,7 +228,7 @@ const medicamentosController = {
             mesInicialFirebase,
             intervaloHorasFirebase,
             diasConsumoFirebase,
-            CompartimentosFirebase},
+            compartimentosFirebase},
             {where:{id_med}}
         )
         .then(()=>{
@@ -246,10 +246,10 @@ const medicamentosController = {
         })
     },
     putMedCompartimento:(req, res)=>{
-        let{ nome_med, CompartimentosFirebase } = req.body;
+        let{ nome_med, compartimentosFirebase } = req.body;
         let{ id_med } = req.params;
         medicamentosModel.update(
-            { nome_med, CompartimentosFirebase },
+            { nome_med, compartimentosFirebase },
             {where:{id_med}}
         )
         .then(()=>{
@@ -272,7 +272,7 @@ const medicamentosController = {
         medicamentosModel.findByPk(id_med)
           .then((medicamento) => {
             if (medicamento) {
-              medicamento.update({ CompartimentosFirebase: null })
+              medicamento.update({ compartimentosFirebase: null })
                 .then(() => {
                   return res.status(200).json({
                     erroStatus: false,
@@ -304,8 +304,8 @@ const medicamentosController = {
     destroyMedicamento:(req, res)=>{
         let{id_med} = req.params;
         medicamentosModel.findByPk(id_med)
-        .then((Medicamentos)=>{
-            if (Medicamentos){
+        .then((medicamentos)=>{
+            if (medicamentos){
                 medicamentosModel.destroy({where:{id_med}})
                 .then(()=>{
                     return res.status(200).json({

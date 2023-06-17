@@ -53,7 +53,7 @@ const medicamentosModel = connection.define('Medicamentos',
         type: DataTypes.STRING,
         allowNull: true
     },
-    CompartimentosFirebase: {
+    compartimentosFirebase: {
         type: DataTypes.INTEGER,
         allowNull: true
     }
