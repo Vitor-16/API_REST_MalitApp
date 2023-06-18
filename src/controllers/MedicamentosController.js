@@ -45,7 +45,23 @@ const medicamentosController = {
         })
     },
     getMedicamentos:(req, res)=>{
-        medicamentosModel.findAll()
+        medicamentosModel.findAll({
+            attributes: ['id_med',
+                         'nome_med',
+                         'descricao',
+                         'quantidade',
+                         [sequelize.literal("DATE_FORMAT(data, '%d/%m/%Y')"), 'data'], 
+                         [sequelize.fn('SUBSTRING', sequelize.col('hora'), 1, 5), 'hora'],
+                         'horarioInicialFirebase',
+                         'minutoInicialFirebase',
+                         'diaInicialFirebase',
+                         'mesInicialFirebase',
+                         'intervaloHorasFirebase',
+                         'diasConsumoFirebase',
+                         'compartimentosFirebase'
+            ],
+            order: [['id_med', 'DESC']]
+        })
         .then((response)=>{
             return res.status(200).json({
                 erroStatus:false,
